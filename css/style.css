@@ -97,8 +97,9 @@ img { max-width: 100%; }
 .logo-mark {
   width: 40px;
   height: 40px;
-  border-radius: 12px;
   display: block;
+  background: none;
+  box-shadow: none;
   transition: transform 0.3s;
 }
 .logo-mark svg { width: 100%; height: 100%; display: block; }
@@ -774,7 +775,7 @@ h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); margin: 0.6rem 0 1rem; letter-spacin
   .coupon-right { padding: 1.4rem 1.25rem; }
 }
 /* Logo passt sich dem Hintergrund an: dunkel auf hell, gelb auf dunkel */
-.logo-mark .lf { fill: #2a170a; transition: fill 0.4s; }
+.logo-mark .lf { fill: #5a3416; transition: fill 0.4s; }
 .logo-mark .ls { fill: #9a5410; transition: fill 0.4s; }
 [data-theme="dark"] .logo-mark .lf { fill: #ffd23f; }
 [data-theme="dark"] .logo-mark .ls { fill: #b07a35; }
