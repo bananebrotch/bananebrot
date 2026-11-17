@@ -7,11 +7,11 @@
   <meta name="description" content="Welche Sterne stehen gerade über der Schweiz? Der live berechnete Sternenhimmel über Zürich, Bern, Basel, Genf, Lugano und Chur.">
   <meta property="og:title" content="Stärnehimmel · bananebrot.ch">
   <meta property="og:description" content="Welche Sterne stehen gerade über der Schweiz?">
-  <link rel="icon" type="image/svg+xml" href="logo.svg?v=202611172051">
+  <link rel="icon" type="image/svg+xml" href="logo.svg?v=202611172112">
   <script>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}d.dataset.theme=t}catch(e){d.dataset.theme='light'}})();</script>
-  <link rel="stylesheet" href="css/style.css?v=202611172051">
+  <link rel="stylesheet" href="css/style.css?v=202611172112">
 </head>
-<body>
+<body class="page-sky">
 
   <header class="site-header">
     <nav class="nav" aria-label="Hauptnavigation">
@@ -20,7 +20,7 @@
         <li><a href="index.html">Start</a></li>
         <li><a href="spiel.html">Spiel</a></li>
         <li><a href="rezept.html">Rezept</a></li>
-        <li><a href="sterne.html" aria-current="page">Sterne</a></li>
+        <li><a href="sterne.html" aria-current="page">Aktuelli Sternehimmel</a></li>
       </ul>
       <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Schoggi-Modus umschalten">
         <span class="tt-track"><span class="tt-knob"></span></span>
@@ -31,13 +31,12 @@
   </header>
 
   <main class="container">
-    <section class="section" style="padding-top:3rem">
-      <span class="eyebrow">✨ Live berechnet</span>
-      <h1>Stärnehimmel</h1>
-      <p class="section-intro">So sieht de Himmel grad über de Schwiiz us. Häb s Handy über de Chopf, Norde (N) obe, und tipp en Stärn a, zum sin Name gseh.</p>
+    <section class="section sky-hero">
+      <h1>Sternehimmel <span class="live-badge"><span class="live-dot" aria-hidden="true"></span>live berechnet</span></h1>
+      <p class="section-intro">So gseht de Himmel grad über de Schwiz us. Heb dis Handy über de Chopf, Norde obe und tipp en Stern ah, zum sin Name z gseh.</p>
 
       <div class="sky-layout">
-        <div class="card sky-stage">
+        <div class="sky-stage">
           <canvas id="sky" aria-label="Sternkarte des aktuellen Himmels"></canvas>
           <div class="sky-tip" id="sky-tip" hidden></div>
         </div>
@@ -64,7 +63,7 @@
             <label for="sky-time">Ziit verschiebe: <span id="sky-time-label">jetzt</span></label>
             <input type="range" id="sky-time" min="-12" max="12" step="0.25" value="0">
             <div class="sky-row">
-              <button class="btn btn-primary btn-small" type="button" id="sky-now">Jetz</button>
+              <button class="btn btn-primary btn-small" type="button" id="sky-now">Jetzt</button>
             </div>
             <div class="sky-checks">
               <label><input type="checkbox" id="sky-lines" checked> Stärnbild-Linie</label>
@@ -72,10 +71,13 @@
             </div>
           </div>
 
+          <h2>Planete</h2>
+          <ul class="sky-list sky-planets" id="sky-planets"></ul>
+
           <h2>Grad guet sichtbar</h2>
           <ul class="sky-list" id="sky-list"></ul>
 
-          <p class="sky-credit">Sterndaten: Hipparcos-Katalog via d3-celestial (Olaf Frohn, BSD-Lizenz). Positionen werden direkt in deinem Browser berechnet. Planeten werden nicht angezeigt.</p>
+          <p class="sky-credit">Sterndaten: Hipparcos-Katalog via d3-celestial (Olaf Frohn, BSD-Lizenz). Planetenbahnen: vereinfachte Bahnelemente nach NASA/JPL. Alles wird direkt in deinem Browser berechnet.</p>
         </aside>
       </div>
     </section>
@@ -87,8 +89,8 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=202611172051"></script>
-  <script src="js/himmel-daten.js?v=202611172051"></script>
-  <script src="js/sterne.js?v=202611172051"></script>
+  <script src="js/main.js?v=202611172112"></script>
+  <script src="js/himmel-daten.js?v=202611172112"></script>
+  <script src="js/sterne.js?v=202611172112"></script>
 </body>
 </html>

@@ -33,7 +33,8 @@
     status: document.getElementById('sky-status'),
     moon: document.getElementById('sky-moon'),
     list: document.getElementById('sky-list'),
-    tip: document.getElementById('sky-tip')
+    tip: document.getElementById('sky-tip'),
+    planets: document.getElementById('sky-planets')
   };
 
   let place = PLACES.zuerich;
@@ -89,6 +90,60 @@
     const lat = 5.128 * Math.sin(F);
     return { ...eclipticToEquatorial(lon, lat, d), lon };
   }
+
+  // Planeten: vereinfachte Keplerbahnen nach NASA/JPL (Standish), gültig ca. 1800–2050.
+  // [a, e, I, L, Perihel-Länge, Knoten-Länge] und deren Änderung pro Jahrhundert
+  const ORBITS = {
+    Merkur: [[0.38709927, 0.20563593, 7.00497902, 252.2503235, 77.45779628, 48.33076593], [0.00000037, 0.00001906, -0.00594749, 149472.67411175, 0.16047689, -0.12534081]],
+    Venus: [[0.72333566, 0.00677672, 3.39467605, 181.9790995, 131.60246718, 76.67984255], [0.0000039, -0.00004107, -0.0007889, 58517.81538729, 0.00268329, -0.27769418]],
+    Erde: [[1.00000261, 0.01671123, -0.00001531, 100.46457166, 102.93768193, 0], [0.00000562, -0.00004392, -0.01294668, 35999.37244981, 0.32327364, 0]],
+    Mars: [[1.52371034, 0.0933941, 1.84969142, -4.55343205, -23.94362959, 49.55953891], [0.00001847, 0.00007882, -0.00813131, 19140.30268499, 0.44441088, -0.29257343]],
+    Jupiter: [[5.202887, 0.04838624, 1.30439695, 34.39644051, 14.72847983, 100.47390909], [-0.00011607, -0.00013253, -0.00183714, 3034.74612775, 0.21252668, 0.20469106]],
+    Saturn: [[9.53667594, 0.05386179, 2.48599187, 49.95424423, 92.59887831, 113.66242448], [-0.0012506, -0.00050991, 0.00193609, 1222.49362201, -0.41897216, -0.28867794]]
+  };
+  const PLANET_STYLE = {
+    Merkur: { color: '#d9c9b0', size: 3 },
+    Venus: { color: '#fff4d6', size: 5.5 },
+    Mars: { color: '#ff7a4d', size: 4 },
+    Jupiter: { color: '#ffe2b0', size: 5 },
+    Saturn: { color: '#f0d79a', size: 4.2 }
+  };
+
+  function heliocentric(name, T) {
+    const [el, rate] = ORBITS[name];
+    const [a, e, I, L, wBar, node] = el.map((v, i) => v + rate[i] * T);
+    const w = (wBar - node) * RAD;
+    const O = node * RAD;
+    const inc = I * RAD;
+    let M = norm(L - wBar);
+    if (M > 180) M -= 360;
+    M *= RAD;
+    let E = M + e * Math.sin(M);
+    for (let k = 0; k < 8; k++) E -= (E - e * Math.sin(E) - M) / (1 - e * Math.cos(E));
+    const xp = a * (Math.cos(E) - e);
+    const yp = a * Math.sqrt(1 - e * e) * Math.sin(E);
+    return {
+      x: (Math.cos(w) * Math.cos(O) - Math.sin(w) * Math.sin(O) * Math.cos(inc)) * xp + (-Math.sin(w) * Math.cos(O) - Math.cos(w) * Math.sin(O) * Math.cos(inc)) * yp,
+      y: (Math.cos(w) * Math.sin(O) + Math.sin(w) * Math.cos(O) * Math.cos(inc)) * xp + (-Math.sin(w) * Math.sin(O) + Math.cos(w) * Math.cos(O) * Math.cos(inc)) * yp,
+      z: Math.sin(w) * Math.sin(inc) * xp + Math.cos(w) * Math.sin(inc) * yp
+    };
+  }
+
+  function planetPositions(date) {
+    const d = julian(date) - 2451545.0;
+    const T = d / 36525;
+    const earth = heliocentric('Erde', T);
+    return Object.keys(PLANET_STYLE).map((name) => {
+      const p = heliocentric(name, T);
+      const x = p.x - earth.x;
+      const y = p.y - earth.y;
+      const z = p.z - earth.z;
+      const lon = norm(Math.atan2(y, x) / RAD);
+      const lat = Math.atan2(z, Math.hypot(x, y)) / RAD;
+      return { name, ...eclipticToEquatorial(lon, lat, d), lon };
+    });
+  }
+  window.__planetPositions = planetPositions; // für Tests
 
   function moonPhase(date) {
     const sun = sunPosition(date);
@@ -151,8 +206,8 @@
     ctx.clearRect(0, 0, size, size);
 
     // Himmel: Farbe je nach Sonnenstand
-    let inner = '#0b1a33';
-    let outer = '#050b18';
+    let inner = '#0d1d3d';
+    let outer = '#060d1f';
     if (sunH.alt > 0) { inner = '#5aa0d8'; outer = '#2c6aa3'; }
     else if (sunH.alt > -6) { inner = '#2c4a7a'; outer = '#16264a'; }
     else if (sunH.alt > -12) { inner = '#17284d'; outer = '#0a1430'; }
@@ -220,6 +275,39 @@
     });
     ctx.globalAlpha = 1;
 
+    // Planeten
+    const planets = planetPositions(date).map((pl) => ({ ...pl, h: toHorizon(pl.ra, pl.dec, lst, place.lat) }));
+    for (const pl of planets) {
+      if (pl.h.alt < 0) continue;
+      const st = PLANET_STYLE[pl.name];
+      const p = project(pl.h.alt, pl.h.az, R, c);
+      ctx.save();
+      ctx.globalAlpha = Math.max(0.6, dayFade);
+      ctx.fillStyle = st.color;
+      ctx.shadowColor = st.color;
+      ctx.shadowBlur = 12 * scale;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, st.size * scale, 0, Math.PI * 2);
+      ctx.fill();
+      if (pl.name === 'Saturn') {
+        ctx.shadowBlur = 0;
+        ctx.strokeStyle = st.color;
+        ctx.lineWidth = 1.2 * scale;
+        ctx.beginPath();
+        ctx.ellipse(p.x, p.y, st.size * 2 * scale, st.size * 0.7 * scale, -0.4, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+      ctx.restore();
+      if (els.labels.checked) {
+        ctx.font = `700 ${Math.round(10 * scale + 3)}px system-ui, sans-serif`;
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = st.color;
+        ctx.fillText(pl.name, p.x + (st.size + 5) * scale, p.y + 10 * scale);
+      }
+      drawnStars.push({ x: p.x, y: p.y, planet: pl.name, mag: -3, alt: pl.h.alt });
+    }
+
     // Mond
     const moon = moonPosition(date);
     const moonH = toHorizon(moon.ra, moon.dec, lst, place.lat);
@@ -272,26 +360,41 @@
     ctx.restore();
 
     // Rand und Himmelsrichtungen
-    ctx.strokeStyle = 'rgba(255,210,63,0.6)';
-    ctx.lineWidth = 2;
+    ctx.strokeStyle = 'rgba(160,190,255,0.18)';
+    ctx.lineWidth = 1;
     ctx.beginPath(); ctx.arc(c, c, R, 0, Math.PI * 2); ctx.stroke();
     ctx.font = `800 ${Math.round(13 * scale + 3)}px system-ui, sans-serif`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#3b2414';
+    ctx.fillStyle = 'rgba(232,238,255,0.85)';
     const dirs = [['N', 0], ['O', 90], ['S', 180], ['W', 270]];
     for (const [label, az] of dirs) {
       const a = az * RAD;
       ctx.fillText(label, c - (R + 16) * Math.sin(a), c - (R + 16) * Math.cos(a));
     }
 
-    updateInfo(date, sunH, moonH, phase, lst);
+    updateInfo(date, sunH, moonH, phase, lst, planets);
   }
 
   // ---------- Infos neben dem Himmel ----------
-  function updateInfo(date, sunH, moonH, phase, lst) {
-    const fmt = new Intl.DateTimeFormat('de-CH', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Zurich' });
-    els.when.textContent = `${place.name} · ${fmt.format(date)}${offsetHours === 0 ? ' (jetzt)' : ''}`;
+  // Datum mit Wochentagen auf Schweizerdeutsch
+  const WOCHENTAGE = { Montag: 'Mäntig', Dienstag: 'Zistig', Mittwoch: 'Mittwuch', Donnerstag: 'Dunnstig', Freitag: 'Fritig', Samstag: 'Samstig', Sonntag: 'Sunntig' };
+  function swissDate(date) {
+    const parts = {};
+    new Intl.DateTimeFormat('de-CH', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Europe/Zurich' })
+      .formatToParts(date).forEach((p) => { parts[p.type] = p.value; });
+    return `${WOCHENTAGE[parts.weekday] || parts.weekday}, ${parts.day}. ${parts.month} um ${parts.hour}:${parts.minute}`;
+  }
+
+  function updateInfo(date, sunH, moonH, phase, lst, planets) {
+    els.when.textContent = `${place.name} · ${swissDate(date)}${offsetHours === 0 ? ' (jetzt)' : ''}`;
+
+    const vis = planets.filter((p) => p.h.alt > 0).sort((a, b) => b.h.alt - a.h.alt);
+    if (els.planets) {
+      els.planets.innerHTML = vis.length
+        ? vis.map((p) => `<li><span class="pl-dot" style="background:${PLANET_STYLE[p.name].color}"></span>${p.name} <small>${Math.round(p.h.alt)}°</small></li>`).join('')
+        : '<li>Grad kei Planet über em Horizont.</li>';
+    }
 
     let status;
     if (sunH.alt > 0) status = '☀️ Es ist Tag. Die Sterne sind trotzdem da, nur zu schwach gegen das Sonnenlicht. Schieb die Zeit auf den Abend!';
@@ -319,6 +422,7 @@
   // ---------- Stern-Info beim Antippen ----------
   function starLabel(s) {
     if (s.moon) return '🌙 Mond';
+    if (s.planet) return `🪐 <strong>${s.planet}</strong><br>Planet`;
     const n = DATA.names[s.i];
     const star = DATA.stars[s.i];
     const consName = n && DATA.cons[n[2]] ? DATA.cons[n[2]][0] : '';
