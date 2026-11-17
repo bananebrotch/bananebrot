@@ -1,3 +1,8 @@
+/* ---------- Eigene Schriften (lokal gehostet, SIL Open Font License, siehe /fonts) ---------- */
+@font-face { font-family: "Inter Display"; src: url("../fonts/inter-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "Orbitron"; src: url("../fonts/orbitron-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Orbitron"; src: url("../fonts/orbitron-latin-900-normal.woff2") format("woff2"); font-weight: 900; font-style: normal; font-display: swap; }
+
 /* =========================================================
    bananebrot.ch – Design
    hell = «Banane-Modus», dunkel = «Schoggi-Modus»
@@ -1161,3 +1166,15 @@ body.page-imp .nav-links a[aria-current="page"]::after { background: #ff3b5c; bo
   opacity: 0.18;
   z-index: -1;
 }
+
+/* Impostor: überall dieselbe kräftige Schrift (Handy = Computer) */
+body.page-imp { --font-display: "Inter Display", system-ui, -apple-system, "Segoe UI", sans-serif; }
+body.page-imp h1, body.page-imp h2, body.page-imp .imp-word, body.page-imp .imp-glitch, body.page-imp .imp-countdown, body.page-imp .imp-timer span { font-weight: 800; }
+.teaser-imp .teaser-title { font-family: "Inter Display", system-ui, sans-serif; font-weight: 800; }
+
+/* Sternehimmel: Weltraum-Schrift für Titel */
+body.page-sky .sky-hero h1,
+.teaser-sky .teaser-title { font-family: "Orbitron", "Inter Display", system-ui, sans-serif; font-weight: 900; letter-spacing: 0.04em; }
+body.page-sky .sky-hero h1 { font-size: clamp(2rem, 7.5vw, 3.8rem); }
+.teaser-sky .teaser-title { font-size: clamp(1.6rem, 4.2vw, 2.3rem); }
+body.page-sky .sky-panel h2 { font-family: "Orbitron", system-ui, sans-serif; font-weight: 700; font-size: 1.05rem; letter-spacing: 0.06em; text-transform: uppercase; }
