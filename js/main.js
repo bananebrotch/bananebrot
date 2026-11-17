@@ -205,18 +205,38 @@
 
   // ---------- Versteckter Aufruf-Zähler im Guetschii ----------
   // Zählt jeden Aufruf der Startseite über den Gratis-Dienst «Abacus».
-  // Klappt der Dienst einmal nicht, bleibt die Zeile einfach unsichtbar.
+  // Robust: bis zu 3 Versuche mit Zeitlimit; die letzte bekannte Zahl wird
+  // gemerkt und angezeigt, falls der Dienst gerade nicht antwortet.
   const hitsEl = document.querySelector('[data-hits]');
   if (hitsEl && window.fetch) {
-    fetch('https://abacus.jasoncameron.dev/hit/bananebrot.ch/startseite')
-      .then((r) => (r.ok ? r.json() : Promise.reject()))
-      .then((data) => {
-        const n = Number(data && data.value);
-        if (!n) return;
-        hitsEl.textContent = `Scho ${n.toLocaleString('de-CH')}× ihglöst worde.`;
-        hitsEl.hidden = false;
-      })
-      .catch(() => { /* Zähler nicht erreichbar: nichts anzeigen */ });
+    const COUNTER_URL = 'https://abacus.jasoncameron.dev/hit/bananebrot.ch/startseite';
+    const showHits = (n) => {
+      if (!n) return;
+      hitsEl.textContent = `Scho ${Number(n).toLocaleString('de-CH')}× ihglöst worde.`;
+      hitsEl.hidden = false;
+    };
+    showHits(Number(store.get('bananebrot-hits')) || 0); // sofort die letzte bekannte Zahl
+
+    const fetchWithTimeout = (url, ms) => {
+      const ctrl = 'AbortController' in window ? new AbortController() : null;
+      const timer = ctrl ? setTimeout(() => ctrl.abort(), ms) : null;
+      return fetch(url, ctrl ? { signal: ctrl.signal, cache: 'no-store' } : { cache: 'no-store' })
+        .finally(() => timer && clearTimeout(timer));
+    };
+    const tryCount = (attempt) => {
+      fetchWithTimeout(COUNTER_URL, 6000)
+        .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+        .then((data) => {
+          const n = Number(data && data.value);
+          if (!n) return;
+          store.set('bananebrot-hits', String(n));
+          showHits(n);
+        })
+        .catch(() => {
+          if (attempt < 3) setTimeout(() => tryCount(attempt + 1), 1500 * attempt);
+        });
+    };
+    tryCount(1);
   }
 
   // ---------- Jahr im Footer ----------
