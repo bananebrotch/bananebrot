@@ -101,7 +101,6 @@
   thermo.className = 'thermo';
   thermo.setAttribute('aria-hidden', 'true');
   document.body.appendChild(thermo);
-  let baked = false;
   function updateThermo() {
     const max = document.documentElement.scrollHeight - window.innerHeight;
     const progress = max > 0 ? window.scrollY / max : 0;
@@ -109,10 +108,6 @@
     if (temp >= 178) thermo.textContent = '🍞 180 °C: fertig gebacken!';
     else if (temp > 120) thermo.textContent = `🔥 ${temp} °C`;
     else thermo.textContent = `🌡️ ${temp} °C`;
-    if (temp >= 178 && !baked && max > 400) {
-      baked = true;
-      toast('🍞 Fertig gebacken! Du hast die ganze Seite gelesen.');
-    }
   }
   window.addEventListener('scroll', updateThermo, { passive: true });
   window.addEventListener('resize', updateThermo);
