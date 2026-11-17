@@ -800,8 +800,8 @@ h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); margin: 0.6rem 0 1rem; letter-spacin
   z-index: 2;
 }
 .sky-panel h2 { margin: 0 0 0.5rem; font-size: 1.3rem; }
-.sky-when { font-weight: 800; margin: 0 0 0.75rem; }
-.sky-panel p { margin: 0 0 0.75rem; color: var(--muted); }
+.sky-when { font-weight: 800; margin: 0 0 0.5em; }
+.sky-panel p { margin: 0 0 0.5em; color: var(--muted); }
 .sky-controls { display: grid; gap: 0.9rem; margin: 1rem 0; }
 .sky-controls label { font-weight: 700; font-size: 0.92rem; }
 .sky-controls select {
@@ -821,7 +821,7 @@ h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); margin: 0.6rem 0 1rem; letter-spacin
 .sky-checks input { accent-color: var(--banana-deep); width: 1.1rem; height: 1.1rem; }
 .sky-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .sky-list li { background: color-mix(in srgb, var(--banana) 30%, transparent); padding: 0.2rem 0.65rem; border-radius: 999px; font-weight: 600; font-size: 0.88rem; }
-.sky-credit { font-size: 0.7rem; line-height: 1.5; color: var(--muted); margin: calc(0.6rem + 4px) 0 0; opacity: 0.85; }
+.sky-panel .sky-credit { font-size: 0.7rem; line-height: 1.5; color: var(--muted); margin: 0.75rem 0 0; opacity: 0.85; }
 
 /* ---------- Seite «Sternehimmel»: immer Nacht-Look ---------- */
 html:has(body.page-sky) { background: #0a1630; }
@@ -902,10 +902,7 @@ body.page-sky .nav-links a[aria-current="page"] { color: #1c120b; }
 body.page-sky .sky-list li { background: rgba(255, 210, 63, 0.14); color: var(--text); }
 body.page-sky .crumb { background: #fff8d6 !important; border-radius: 50%; box-shadow: 0 0 6px #ffd23f; }
 /* feste Höhen, damit beim Zeit-Verschieben nichts herumspringt */
-.sky-when { min-height: 3.2em; }
-#sky-moon { min-height: 3.2em; }
 #sky-time-label { display: inline-block; min-width: 6.5em; font-variant-numeric: tabular-nums; }
-@media (max-width: 600px) { .sky-when, #sky-moon { min-height: 4.8em; } }
 /* Sternehimmel: Bedienelemente in Astro-Violett statt Gelb */
 body.page-sky .sky-controls input[type="range"],
 body.page-sky .sky-checks input { accent-color: #8f7bff; }
@@ -920,5 +917,3 @@ body.page-sky .nav-links a[aria-current="page"] { background: linear-gradient(13
 body.page-sky .sky-list li { background: rgba(143, 123, 255, 0.2); }
 body.page-sky .logo-mark .lf { fill: #b3a6ff; }
 body.page-sky .logo-mark .ls { fill: #7f6fe0; }
-#sky-iss { min-height: 3.2em; }
-@media (max-width: 600px) { #sky-iss { min-height: 4.8em; } }
