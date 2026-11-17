@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Impostor · bananebrot.ch</title>
+  <meta name="description" content="Impostor: das Partyspiel für ein Handy, mit Schweizer Wörtern. Alle kennen das geheime Wort, nur der Impostor nicht.">
+  <meta property="og:title" content="Impostor · bananebrot.ch">
+  <meta property="og:description" content="Wer isch de Impostor? Partyspiel für ein Handy.">
+  <link rel="icon" type="image/svg+xml" href="logo.svg?v=202611172200">
+  <script>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}d.dataset.theme=t}catch(e){d.dataset.theme='light'}})();</script>
+  <link rel="stylesheet" href="css/style.css?v=202611172200">
+</head>
+<body class="page-imp">
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a class="logo" href="index.html"><span class="logo-mark"><svg viewBox="35 37 140 140" aria-hidden="true"><circle class="lf" fill="#5a3416" cx="72" cy="78" r="13"/><circle class="lf" fill="#5a3416" cx="128" cy="78" r="13"/><path class="lf" fill="#5a3416" d="M44 112 Q100 178 156 112 Q160 106 154 104 Q100 150 50 104 Q42 104 44 112 Z"/><path class="ls" fill="#9a5410" d="M154 104 L164 96 L168 102 L158 110 Z"/></svg></span><span class="logo-name">bananebrot<span class="tld">.ch</span></span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Start</a></li>
+        <li><a href="impostor.html" aria-current="page">Impostor</a></li>
+        <li><a href="rezept.html">Rezept</a></li>
+        <li><a href="sterne.html">Aktuelli Sternehimmel</a></li>
+      </ul>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Schoggi-Modus umschalten">
+        <span class="tt-track"><span class="tt-knob"></span></span>
+        <span class="tt-label">Schoggi-Modus</span>
+      </button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menü öffnen">☰</button>
+    </nav>
+  </header>
+
+  <main class="container imp-main">
+    <section class="section imp-hero">
+      <h1 class="imp-title"><span class="imp-glitch" data-text="IMPOSTOR">IMPOSTOR</span></h1>
+      <p class="section-intro">Alli kenned s geheime Wort. Nur de Impostor nöd. Wer blufft am beschte? Es Handy, 3 bis 12 Lüüt, kei Internet nötig.</p>
+    </section>
+
+    <section class="imp-stage">
+      <div id="imp-app" aria-live="polite"></div>
+    </section>
+
+    <details class="imp-rules card">
+      <summary>So gaht s</summary>
+      <ol>
+        <li>Spieler iitrage und s Handy reihum gäh. Jedi Person luegt ihres Wort geheim aa.</li>
+        <li>Alli gsehnd s gliiche Wort, nur de Impostor nöd (oder im Undercover-Modus es ähnlichs).</li>
+        <li>Reihum seit jedi Person eis Wort, wo zum Begriff passt. Nöd z offensichtlich!</li>
+        <li>Am Schluss zeiged alli gliichziitig uf die verdächtigst Person.</li>
+        <li>Erwischt? Denn gwünnt d Gruppe. Suscht gwünnt de Impostor. Kann de Impostor s Wort errate, gwünnt er sowieso.</li>
+      </ol>
+    </details>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span data-year>2026</span> bananebrot.ch – mit viel ❤️ und 🍌</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=202611172200"></script>
+  <script src="js/impostor.js?v=202611172200"></script>
+</body>
+</html>

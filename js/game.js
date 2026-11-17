@@ -129,11 +129,11 @@
       pointerX = null;
       e.preventDefault();
     }
-    if (e.key === 'p' || e.key === 'P' || e.key === 'Escape') {
+    if ((e.key === 'p' || e.key === 'P' || e.key === 'Escape') && !(e.target.closest && e.target.closest('input, textarea, select'))) {
       if (state === 'play') pause();
       else if (state === 'pause') resume();
     }
-    if ((e.key === ' ' || e.key === 'Enter') && state !== 'play' && document.activeElement !== ovBtn) {
+    if ((e.key === ' ' || e.key === 'Enter') && state !== 'play' && document.activeElement === canvas) {
       e.preventDefault();
       if (state === 'pause') resume(); else start();
     }
