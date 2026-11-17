@@ -769,6 +769,7 @@ h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); margin: 0.6rem 0 1rem; letter-spacin
 .coupon-text { margin: 0 0 1.25rem; font-size: 1.1rem; color: var(--muted); }
 .coupon-cta { display: flex; justify-content: center; }
 .coupon-hits { margin: 0.35rem 0 0; text-align: right; font-size: 0.72rem; color: var(--muted); opacity: 0.6; font-variant-numeric: tabular-nums; }
+.coupon-hits a { color: inherit; }
 .coupon-fine { margin: 1.1rem 0 0; font-size: 0.78rem; color: var(--muted); opacity: 0.8; }
 @media (max-width: 600px) {
   .coupon { grid-template-columns: 1fr; }

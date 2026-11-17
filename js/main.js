@@ -239,15 +239,17 @@
   // Im Guetschii: wie viele Bananenbrote alle Spieler zusammen schon gebacken haben
   const loavesEl = document.querySelector('[data-hits]');
   if (loavesEl) {
-    const showLoaves = (n) => {
-      if (!n) return;
-      loavesEl.textContent = `Scho ${Number(n).toLocaleString('de-CH')} Bananebrot uf dere Site bache.`;
+    const showLoaves = (n, confirmed) => {
+      if (!n && !confirmed) return;
+      loavesEl.innerHTML = n
+        ? `Scho ${Number(n).toLocaleString('de-CH')} Bananebrot uf dere Site bache.`
+        : 'No kes Bananebrot uf dere Site bache. <a href="spiel.html">Bisch du de Erscht?</a>';
       loavesEl.hidden = false;
     };
     showLoaves(Number(store.get('bananebrot-loaves')) || 0); // sofort die letzte bekannte Zahl
     readCounter('/get/bananebrot.ch/brote', (n) => {
       if (n) store.set('bananebrot-loaves', String(n));
-      showLoaves(n);
+      showLoaves(n, true);
     });
   }
 
