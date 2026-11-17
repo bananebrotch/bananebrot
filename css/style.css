@@ -1276,7 +1276,11 @@ body.page-sky .sky-panel h2 { font-family: "Orbitron", system-ui, sans-serif; fo
 .v3-stub { transform-origin: 0% 0%; transition: transform 0.45s cubic-bezier(0.3, 1.4, 0.5, 1) 0s, opacity 0.3s; }
 .teaser-rezept:hover .v3-scissors { animation: snip-across 0.9s ease-in-out forwards; }
 .teaser-rezept:hover .v3-scissors svg path:first-of-type { animation: snip-blade 0.18s ease-in-out 5 alternate; }
-.teaser-rezept:hover .v3-stub { transform: translateY(10px) rotate(-3deg); transition-delay: 0.8s; }
+/* nach dem Schnitt fällt der Streifen nach unten weg – innerhalb der Karte (overflow: hidden) */
+.teaser-rezept:hover .v3-stub {
+  transform: translateY(130%) rotate(-7deg);
+  transition: transform 0.65s cubic-bezier(0.55, 0, 1, 0.45) 0.85s;
+}
 @keyframes snip-across {
   0% { left: -48px; opacity: 1; }
   90% { opacity: 1; }
