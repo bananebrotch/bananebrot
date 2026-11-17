@@ -1394,3 +1394,19 @@ h1, .section-title, .teaser-title, .coupon-title { font-weight: 800; }
 .teaser-imp:hover .v3-impostor { animation: none; transform: translateY(18%); transition: transform 0.45s cubic-bezier(0.3, 1.5, 0.5, 1); }
 .teaser-imp:hover .imp-eyes { animation: imp-look 2.4s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .v3-impostor { transform: translateY(18%); } }
+
+/* Guetschii-Karte: dunkles Schoggi-Braun mit Gold – passend zu den zwei anderen dunklen Karten */
+.teaser-rezept {
+  color: #f8ead4;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(233, 180, 70, 0.32), transparent 55%),
+    radial-gradient(circle at 0% 100%, rgba(199, 122, 58, 0.25), transparent 50%),
+    #24160d;
+  border: 2px dashed rgba(233, 196, 106, 0.55);
+}
+.teaser-rezept .teaser-label { color: #e9c46a; }
+.teaser-rezept .teaser-title { color: #fff4dc; }
+.teaser-rezept .teaser-text { color: #d9c3a5; }
+.teaser .teaser-hits { color: #bfa682; }
+.v3-stub { background: #e2b65a; border-top: 2px dashed #8a6420; color: #24160d; }
+.v3-scissors { color: #fff4dc; }
