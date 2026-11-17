@@ -903,3 +903,10 @@ body.page-sky .nav-links a[aria-current="page"] { color: #1c120b; }
 .sky-panel h2 { margin-top: 1.25rem; }
 body.page-sky .sky-list li { background: rgba(255, 210, 63, 0.14); color: var(--text); }
 body.page-sky .crumb { background: #fff8d6 !important; border-radius: 50%; box-shadow: 0 0 6px #ffd23f; }
+/* feste Höhen, damit beim Zeit-Verschieben nichts herumspringt */
+.sky-when { min-height: 3.2em; }
+#sky-moon { min-height: 3.2em; }
+#sky-time-label { display: inline-block; min-width: 6.5em; font-variant-numeric: tabular-nums; }
+@media (max-width: 600px) { .sky-when, #sky-moon { min-height: 4.8em; } }
+.sky-planets { min-height: 4.6rem; align-content: flex-start; }
+#sky-list { min-height: 8.6rem; align-content: flex-start; }
