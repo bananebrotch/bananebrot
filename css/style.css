@@ -773,4 +773,8 @@ h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); margin: 0.6rem 0 1rem; letter-spacin
   .coupon-emoji { font-size: 3rem; }
   .coupon-right { padding: 1.4rem 1.25rem; }
 }
-[data-theme="dark"] .logo-mark { border-radius: 10px; box-shadow: 0 0 0 1px rgba(255, 210, 140, 0.3); }
+/* Logo passt sich dem Hintergrund an: dunkel auf hell, gelb auf dunkel */
+.logo-mark .lf { fill: #2a170a; transition: fill 0.4s; }
+.logo-mark .ls { fill: #9a5410; transition: fill 0.4s; }
+[data-theme="dark"] .logo-mark .lf { fill: #ffd23f; }
+[data-theme="dark"] .logo-mark .ls { fill: #b07a35; }
