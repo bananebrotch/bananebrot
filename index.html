@@ -7,9 +7,9 @@
   <meta name="description" content="Die Website von Oliver Thalmann. Mit Bananenbrot-Spiel und, ja, einem Bananenbrot-Rezept.">
   <meta property="og:title" content="bananebrot.ch · Oliver Thalmann">
   <meta property="og:description" content="Die Website von Oliver Thalmann. Mit Bananenbrot-Spiel und, ja, einem Bananenbrot-Rezept.">
-  <link rel="icon" type="image/svg+xml" href="logo.svg?v=202611172044">
+  <link rel="icon" type="image/svg+xml" href="logo.svg?v=202611172051">
   <script>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}d.dataset.theme=t}catch(e){d.dataset.theme='light'}})();</script>
-  <link rel="stylesheet" href="css/style.css?v=202611172044">
+  <link rel="stylesheet" href="css/style.css?v=202611172051">
 </head>
 <body>
 
@@ -20,6 +20,7 @@
         <li><a href="index.html" aria-current="page">Start</a></li>
         <li><a href="spiel.html">Spiel</a></li>
         <li><a href="rezept.html">Rezept</a></li>
+        <li><a href="sterne.html">Sterne</a></li>
       </ul>
       <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Schoggi-Modus umschalten">
         <span class="tt-track"><span class="tt-knob"></span></span>
@@ -112,6 +113,20 @@
       </div>
     </section>
 
+    <!-- ===== Mal öppis (interaktive Kunst) ===== -->
+    <section class="container section">
+      <h2 class="section-title reveal">Mal öppis</h2>
+      <p class="section-intro reveal">Fahr mit de Muus oder em Finger übers Feld. Jede Bewegig git es eigets Kunstwerk.</p>
+      <div class="art-wrap reveal">
+        <canvas id="art" aria-label="Malfläche für interaktive Kunst"></canvas>
+      </div>
+      <div class="btn-row art-controls">
+        <button class="btn btn-ghost btn-small" type="button" id="art-palette">🎨 Farbe</button>
+        <button class="btn btn-ghost btn-small" type="button" id="art-clear">🧽 Nöi afange</button>
+        <button class="btn btn-ghost btn-small" type="button" id="art-save">💾 Als Bild speichere</button>
+      </div>
+    </section>
+
     <!-- ===== Kontakt ===== -->
     <section class="container section" id="kontakt">
       <div class="card contact reveal">
@@ -131,6 +146,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=202611172044"></script>
+  <script src="js/main.js?v=202611172051"></script>
+  <script src="js/kunst.js?v=202611172051"></script>
 </body>
 </html>

@@ -781,3 +781,57 @@ h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); margin: 0.6rem 0 1rem; letter-spacin
 .logo-mark .ls { fill: #9a5410; transition: fill 0.4s; }
 [data-theme="dark"] .logo-mark .lf { fill: #ffd23f; }
 [data-theme="dark"] .logo-mark .ls { fill: #b07a35; }
+
+/* ---------- Mal öppis (interaktive Kunst) ---------- */
+.art-wrap {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  background: var(--surface-solid);
+}
+#art { display: block; width: 100%; height: 380px; touch-action: none; cursor: crosshair; }
+@media (max-width: 600px) { #art { height: 300px; } }
+.art-controls { justify-content: center; margin-top: 1rem; }
+
+/* ---------- Sternenhimmel ---------- */
+.sky-layout { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.8fr); gap: 1.5rem; align-items: start; }
+@media (max-width: 900px) { .sky-layout { grid-template-columns: 1fr; } }
+.sky-stage { position: relative; display: flex; justify-content: center; }
+#sky { display: block; touch-action: manipulation; cursor: crosshair; }
+.sky-tip {
+  position: absolute;
+  pointer-events: none;
+  background: rgba(10, 20, 40, 0.92);
+  color: #f3f6ff;
+  border: 1px solid rgba(255, 210, 63, 0.5);
+  border-radius: 10px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.85rem;
+  line-height: 1.35;
+  max-width: 170px;
+  z-index: 2;
+}
+.sky-panel h2 { margin: 0 0 0.5rem; font-size: 1.3rem; }
+.sky-when { font-weight: 800; margin: 0 0 0.75rem; }
+.sky-panel p { margin: 0 0 0.75rem; color: var(--muted); }
+.sky-controls { display: grid; gap: 0.9rem; margin: 1rem 0; }
+.sky-controls label { font-weight: 700; font-size: 0.92rem; }
+.sky-controls select {
+  width: 100%;
+  margin-top: 0.3rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface-solid);
+  color: var(--text);
+  font: inherit;
+}
+.sky-controls input[type="range"] { width: 100%; accent-color: var(--banana-deep); }
+.sky-row { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+.sky-checks { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+.sky-checks label { font-weight: 600; display: flex; gap: 0.4rem; align-items: center; }
+.sky-checks input { accent-color: var(--banana-deep); width: 1.1rem; height: 1.1rem; }
+.sky-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.sky-list li { background: color-mix(in srgb, var(--banana) 30%, transparent); padding: 0.2rem 0.65rem; border-radius: 999px; font-weight: 600; font-size: 0.88rem; }
+.sky-credit { font-size: 0.8rem; color: var(--muted); margin-top: 1rem; }
