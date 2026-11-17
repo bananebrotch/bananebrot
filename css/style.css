@@ -1085,3 +1085,79 @@ body.page-imp .nav-links a[aria-current="page"]::after { background: #ff3b5c; bo
 .sky-controls select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23a99bff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
 .imp-setting select option,
 .sky-controls select option { background: var(--surface-solid); color: var(--text); }
+
+/* ---------- Startseite: Teaser für Impostor & Sternehimmel ---------- */
+.teasers { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; padding-bottom: 0; }
+@media (max-width: 760px) { .teasers { grid-template-columns: 1fr; } }
+.teaser {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-height: 260px;
+  padding: 1.75rem;
+  border-radius: 24px;
+  text-decoration: none;
+  overflow: hidden;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.25);
+  isolation: isolate;
+}
+.teaser-label { display: inline-flex; align-items: center; gap: 0.45rem; text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.78rem; font-weight: 800; }
+.teaser-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.05; }
+.teaser-text { font-size: 1.02rem; max-width: 34ch; }
+.teaser-btn {
+  margin-top: auto;
+  align-self: flex-start;
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 800;
+  transition: transform 0.15s;
+}
+.teaser:hover .teaser-btn { transform: translateX(4px); }
+
+/* Impostor-Look */
+.teaser-imp {
+  color: #f6ecff;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(255, 59, 92, 0.35), transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(143, 123, 255, 0.25), transparent 50%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 4px),
+    #120a18;
+  border: 1px solid rgba(255, 90, 130, 0.3);
+}
+.teaser-imp .teaser-label { color: #ff7a92; }
+.teaser-imp .teaser-title { letter-spacing: 0.08em; color: #f6ecff; }
+.teaser-imp .teaser-text { color: #d6c6ea; }
+.teaser-imp .teaser-btn { background: #ff3b5c; color: #fff; box-shadow: 0 4px 0 #b8183a, 0 8px 20px rgba(255, 59, 92, 0.35); }
+
+/* Sternehimmel-Look */
+.teaser-sky {
+  color: #e8eeff;
+  background:
+    radial-gradient(1.5px 1.5px at 12% 18%, #fff, transparent),
+    radial-gradient(1px 1px at 28% 62%, #cfe0ff, transparent),
+    radial-gradient(1.5px 1.5px at 46% 30%, #fff, transparent),
+    radial-gradient(1px 1px at 63% 12%, #ffe9b0, transparent),
+    radial-gradient(1.5px 1.5px at 78% 48%, #fff, transparent),
+    radial-gradient(1px 1px at 90% 20%, #cfe0ff, transparent),
+    radial-gradient(1px 1px at 70% 80%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 18% 88%, #fff, transparent),
+    radial-gradient(circle at 85% 110%, rgba(79, 179, 255, 0.35), transparent 55%),
+    linear-gradient(160deg, #0b1a38, #040915);
+  border: 1px solid rgba(160, 190, 255, 0.22);
+}
+.teaser-sky .teaser-label { color: #a3b3d9; }
+.teaser-sky .teaser-text { color: #b9c6e6; }
+.teaser-sky .teaser-btn { background: linear-gradient(135deg, #8f7bff, #4fb3ff); color: #fff; box-shadow: 0 4px 0 #4b3fb8, 0 8px 20px rgba(123, 108, 255, 0.35); }
+.teaser-sky::after {
+  content: "";
+  position: absolute;
+  right: -30px;
+  top: -30px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f4f1de, #cfcab0 60%, transparent 62%);
+  opacity: 0.18;
+  z-index: -1;
+}
