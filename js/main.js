@@ -160,22 +160,13 @@
     });
   }
 
-  // ---------- Das Brot anstupsen ----------
-  const BOOPS = [
-    'Hey, nöd drücke! 🍞',
-    'Hihi, das kitzlet!',
-    'Vorsicht, ich bin no warm!',
-    'Bitte nöd ässe … oder doch? 🤔',
-    'Ich bi s’schönste Bananebrot vo de Schwiiz.',
-    'Mehr Schoggi? Ja bitte! 🍫'
-  ];
-  let boopIndex = 0;
+  // ---------- Das Brot anstupsen → fliegende Banane ----------
   document.querySelectorAll('.loaf-svg').forEach((svg) => {
     svg.addEventListener('click', () => {
       svg.classList.remove('boop');
       void svg.getBoundingClientRect();
       svg.classList.add('boop');
-      toast(BOOPS[boopIndex++ % BOOPS.length]);
+      bananaFly();
     });
   });
 
@@ -226,7 +217,7 @@
   }
 
   function bananaFly() {
-    toast('🍌 Wuuusch! Eine fliegende Banane.');
+    toast('Wuuusch! Eh flügendi Banane!');
     if (!reduceMotion) spawnFlyer('🍌', 'fly');
   }
 
