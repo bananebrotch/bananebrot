@@ -1,1 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" rx="46" fill="#1c120b"/><circle cx="72" cy="78" r="13" fill="#ffd23f"/><circle cx="128" cy="78" r="13" fill="#ffd23f"/><path d="M44 112 Q100 178 156 112 Q160 106 154 104 Q100 150 50 104 Q42 104 44 112 Z" fill="#ffd23f"/><path d="M154 104 L164 96 L168 102 L158 110 Z" fill="#8a5a22"/><circle cx="47" cy="109" r="3" fill="#5a3a12"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="35 37 140 140">
+  <style>
+    .lf { fill: #5a3416; } .ls { fill: #9a5410; }
+    @media (prefers-color-scheme: dark) { .lf { fill: #ffd23f; } .ls { fill: #b07a35; } }
+  </style>
+  <circle class="lf" cx="72" cy="78" r="13"/>
+  <circle class="lf" cx="128" cy="78" r="13"/>
+  <path class="lf" d="M44 112 Q100 178 156 112 Q160 106 154 104 Q100 150 50 104 Q42 104 44 112 Z"/>
+  <path class="ls" d="M154 104 L164 96 L168 102 L158 110 Z"/>
+</svg>
