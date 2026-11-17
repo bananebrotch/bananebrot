@@ -7,9 +7,9 @@
   <meta name="description" content="Welche Sterne stehen gerade über der Schweiz? Der live berechnete Sternenhimmel über Zürich, Bern, Basel, Genf, Lugano und Chur.">
   <meta property="og:title" content="Stärnehimmel · bananebrot.ch">
   <meta property="og:description" content="Welche Sterne stehen gerade über der Schweiz?">
-  <link rel="icon" type="image/svg+xml" href="logo.svg?v=202611172112">
+  <link rel="icon" type="image/svg+xml" href="logo.svg?v=202611172123">
   <script>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}d.dataset.theme=t}catch(e){d.dataset.theme='light'}})();</script>
-  <link rel="stylesheet" href="css/style.css?v=202611172112">
+  <link rel="stylesheet" href="css/style.css?v=202611172123">
 </head>
 <body class="page-sky">
 
@@ -43,14 +43,13 @@
 
         <aside class="card sky-panel">
           <p class="sky-when" id="sky-when">…</p>
-          <p id="sky-status"></p>
           <p id="sky-moon"></p>
 
           <div class="sky-controls">
             <label>Ort
               <select id="sky-place">
                 <option value="zuerich" selected>Züri</option>
-                <option value="bern">Bärn</option>
+                <option value="bern">Bern</option>
                 <option value="basel">Basel</option>
                 <option value="genf">Genf</option>
                 <option value="lugano">Lugano</option>
@@ -58,7 +57,7 @@
               </select>
             </label>
             <div class="sky-row">
-              <button class="btn btn-ghost btn-small" type="button" id="sky-locate">📍 Mi Standort</button>
+              <button class="btn btn-ghost btn-small" type="button" id="sky-locate">📍 Min Standort</button>
             </div>
             <label for="sky-time">Ziit verschiebe: <span id="sky-time-label">jetzt</span></label>
             <input type="range" id="sky-time" min="-12" max="12" step="0.25" value="0">
@@ -66,8 +65,8 @@
               <button class="btn btn-primary btn-small" type="button" id="sky-now">Jetzt</button>
             </div>
             <div class="sky-checks">
-              <label><input type="checkbox" id="sky-lines" checked> Stärnbild-Linie</label>
-              <label><input type="checkbox" id="sky-labels" checked> Näme</label>
+              <label><input type="checkbox" id="sky-show-planets" checked> Planete</label>
+              <label><input type="checkbox" id="sky-show-cons" checked> Sternebilder</label>
             </div>
           </div>
 
@@ -89,8 +88,8 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=202611172112"></script>
-  <script src="js/himmel-daten.js?v=202611172112"></script>
-  <script src="js/sterne.js?v=202611172112"></script>
+  <script src="js/main.js?v=202611172123"></script>
+  <script src="js/himmel-daten.js?v=202611172123"></script>
+  <script src="js/sterne.js?v=202611172123"></script>
 </body>
 </html>

@@ -14,7 +14,7 @@
 
   const PLACES = {
     zuerich: { name: 'Züri', lat: 47.3769, lon: 8.5417 },
-    bern: { name: 'Bärn', lat: 46.948, lon: 7.4474 },
+    bern: { name: 'Bern', lat: 46.948, lon: 7.4474 },
     basel: { name: 'Basel', lat: 47.5596, lon: 7.5886 },
     genf: { name: 'Genf', lat: 46.2044, lon: 6.1432 },
     lugano: { name: 'Lugano', lat: 46.0037, lon: 8.9511 },
@@ -27,10 +27,9 @@
     slider: document.getElementById('sky-time'),
     now: document.getElementById('sky-now'),
     locate: document.getElementById('sky-locate'),
-    lines: document.getElementById('sky-lines'),
-    labels: document.getElementById('sky-labels'),
+    showPlanets: document.getElementById('sky-show-planets'),
+    showCons: document.getElementById('sky-show-cons'),
     when: document.getElementById('sky-when'),
-    status: document.getElementById('sky-status'),
     moon: document.getElementById('sky-moon'),
     list: document.getElementById('sky-list'),
     tip: document.getElementById('sky-tip'),
@@ -152,13 +151,13 @@
     const illum = (1 - Math.cos(elong * RAD)) / 2;
     let name;
     if (elong < 12 || elong > 348) name = 'Neumond 🌑';
-    else if (elong < 80) name = 'zunehmende Sichel 🌒';
-    else if (elong < 100) name = 'erstes Viertel 🌓';
-    else if (elong < 168) name = 'zunehmender Mond 🌔';
+    else if (elong < 80) name = 'zuenehmendi Sichle 🌒';
+    else if (elong < 100) name = 'ersts Viertel 🌓';
+    else if (elong < 168) name = 'zuenehmende Mond 🌔';
     else if (elong < 192) name = 'Vollmond 🌕';
-    else if (elong < 260) name = 'abnehmender Mond 🌖';
-    else if (elong < 280) name = 'letztes Viertel 🌗';
-    else name = 'abnehmende Sichel 🌘';
+    else if (elong < 260) name = 'abnehmende Mond 🌖';
+    else if (elong < 280) name = 'letschts Viertel 🌗';
+    else name = 'abnehmendi Sichle 🌘';
     return { elong, illum, name };
   }
 
@@ -233,7 +232,7 @@
     const dayFade = sunH.alt > 0 ? 0.35 : sunH.alt > -6 ? 0.7 : 1;
 
     // Sternbild-Linien
-    if (els.lines.checked) {
+    if (els.showCons.checked) {
       ctx.strokeStyle = `rgba(150,190,255,${0.35 * dayFade})`;
       ctx.lineWidth = 1;
       for (const line of DATA.lines) {
@@ -278,7 +277,7 @@
     // Planeten
     const planets = planetPositions(date).map((pl) => ({ ...pl, h: toHorizon(pl.ra, pl.dec, lst, place.lat) }));
     for (const pl of planets) {
-      if (pl.h.alt < 0) continue;
+      if (pl.h.alt < 0 || !els.showPlanets.checked) continue;
       const st = PLANET_STYLE[pl.name];
       const p = project(pl.h.alt, pl.h.az, R, c);
       ctx.save();
@@ -298,7 +297,7 @@
         ctx.stroke();
       }
       ctx.restore();
-      if (els.labels.checked) {
+      {
         ctx.font = `700 ${Math.round(10 * scale + 3)}px system-ui, sans-serif`;
         ctx.textAlign = 'left';
         ctx.textBaseline = 'middle';
@@ -333,13 +332,13 @@
     }
 
     // Beschriftungen
-    if (els.labels.checked) {
+    {
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      // Sternbilder
+      // Sternbilder (nur wenn «Sternebilder» angekreuzt)
       ctx.font = `600 ${Math.round(11 * scale + 2)}px system-ui, sans-serif`;
       ctx.fillStyle = `rgba(170,200,255,${0.55 * dayFade})`;
-      for (const key of Object.keys(DATA.cons)) {
+      if (els.showCons.checked) for (const key of Object.keys(DATA.cons)) {
         const [name, ra, dec, rank] = DATA.cons[key];
         if (rank > 2) continue;
         const h = toHorizon(ra, dec, lst, place.lat);
@@ -396,16 +395,10 @@
         : '<li>Grad kei Planet über em Horizont.</li>';
     }
 
-    let status;
-    if (sunH.alt > 0) status = '☀️ Es ist Tag. Die Sterne sind trotzdem da, nur zu schwach gegen das Sonnenlicht. Schieb die Zeit auf den Abend!';
-    else if (sunH.alt > -6) status = '🌇 Dämmerung: Die hellsten Sterne und Planeten tauchen gerade auf.';
-    else if (sunH.alt > -12) status = '🌆 Es wird dunkel: Die bekannten Sternbilder sind gut zu sehen.';
-    else status = '🌌 Es ist Nacht: perfekte Zeit zum Sterne schauen. Am besten weg von den Stadtlichtern.';
-    els.status.textContent = status;
 
     els.moon.textContent = moonH.alt > 0
-      ? `Mond: ${phase.name}, ${Math.round(phase.illum * 100)} % beleuchtet, ${Math.round(moonH.alt)}° über dem Horizont.`
-      : `Mond: ${phase.name}, gerade unter dem Horizont.`;
+      ? `Mond: ${phase.name}, ${Math.round(phase.illum * 100)} % belüchtet, ${Math.round(moonH.alt)}° über em Horizont.`
+      : `Mond: ${phase.name}, grad unter em Horizont.`;
 
     // Sichtbare grosse Sternbilder
     const visible = [];
@@ -486,22 +479,22 @@
     place = PLACES[els.place.value] || PLACES.zuerich;
     draw();
   });
-  els.lines.addEventListener('change', draw);
-  els.labels.addEventListener('change', draw);
+  els.showPlanets.addEventListener('change', draw);
+  els.showCons.addEventListener('change', draw);
   if (els.locate) {
     els.locate.addEventListener('click', () => {
       if (!navigator.geolocation) { toast('Dein Browser kann den Standort nicht bestimmen.'); return; }
       navigator.geolocation.getCurrentPosition(
         (pos) => {
-          place = { name: 'Dein Standort', lat: pos.coords.latitude, lon: pos.coords.longitude };
+          place = { name: 'Min Standort', lat: pos.coords.latitude, lon: pos.coords.longitude };
           const opt = document.createElement('option');
           opt.value = 'eigener';
-          opt.textContent = 'Dein Standort';
+          opt.textContent = 'Min Standort';
           els.place.querySelector('option[value="eigener"]')?.remove();
           els.place.appendChild(opt);
           els.place.value = 'eigener';
           PLACES.eigener = place;
-          toast('📍 Himmel über deinem Standort');
+          toast('📍 Himmel über dim Standort');
           draw();
         },
         () => toast('Standort nicht verfügbar. Wähl einfach eine Stadt aus.'),
