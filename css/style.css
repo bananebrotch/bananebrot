@@ -920,3 +920,5 @@ body.page-sky .nav-links a[aria-current="page"] { background: linear-gradient(13
 body.page-sky .sky-list li { background: rgba(143, 123, 255, 0.2); }
 body.page-sky .logo-mark .lf { fill: #b3a6ff; }
 body.page-sky .logo-mark .ls { fill: #7f6fe0; }
+#sky-iss { min-height: 3.2em; }
+@media (max-width: 600px) { #sky-iss { min-height: 4.8em; } }

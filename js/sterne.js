@@ -34,7 +34,8 @@
     moon: document.getElementById('sky-moon'),
     list: document.getElementById('sky-list'),
     tip: document.getElementById('sky-tip'),
-    planets: document.getElementById('sky-planets')
+    planets: document.getElementById('sky-planets'),
+    iss: document.getElementById('sky-iss')
   };
 
   let place = PLACES.zuerich;
@@ -170,6 +171,110 @@
     if (bv < 0.9) return '#fff1c4';
     if (bv < 1.3) return '#ffd59a';
     return '#ffb07a';
+  }
+
+  // ---------- ISS (Internationale Raumstation) ----------
+  // Bahndaten (TLE) werden einmal geladen und im Browser mit satellite.js (SGP4) weitergerechnet.
+  const SAT = window.satellite;
+  let issRec = null;
+  let nextPass = null;
+  let nextPassKey = '';
+
+  function parseTle(text) {
+    const lines = String(text).split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+    const l1 = lines.find((l) => l.startsWith('1 25544'));
+    const l2 = lines.find((l) => l.startsWith('2 25544'));
+    return l1 && l2 ? [l1, l2] : null;
+  }
+
+  function useTle(tle) {
+    try {
+      issRec = SAT.twoline2satrec(tle[0], tle[1]);
+      nextPassKey = '';
+      draw();
+    } catch (e) { issRec = null; }
+  }
+
+  function loadIss() {
+    if (!SAT || !window.fetch) return;
+    let cached = null;
+    try { cached = JSON.parse(localStorage.getItem('iss-tle') || 'null'); } catch (e) { cached = null; }
+    if (cached && cached.tle) useTle(cached.tle);
+    if (cached && Date.now() - cached.at < 12 * 3600000) return; // Bahndaten max. 12 h alt
+
+    const sources = [
+      () => fetch('https://api.wheretheiss.at/v1/satellites/25544/tles').then((r) => (r.ok ? r.json() : Promise.reject()))
+        .then((d) => (d && d.line1 && d.line2 ? [d.line1.trim(), d.line2.trim()] : Promise.reject())),
+      () => fetch('https://celestrak.org/NORAD/elements/gp.php?CATNR=25544&FORMAT=TLE').then((r) => (r.ok ? r.text() : Promise.reject()))
+        .then((t) => parseTle(t) || Promise.reject())
+    ];
+    const tryNext = (i) => {
+      if (i >= sources.length) return;
+      sources[i]()
+        .then((tle) => {
+          try { localStorage.setItem('iss-tle', JSON.stringify({ tle, at: Date.now() })); } catch (e) { /* egal */ }
+          useTle(tle);
+        })
+        .catch(() => tryNext(i + 1));
+    };
+    tryNext(0);
+  }
+
+  // Höhe/Azimut der ISS für einen Beobachter + ob sie von der Sonne beleuchtet ist
+  function issLook(date, obs) {
+    if (!issRec) return null;
+    const pv = SAT.propagate(issRec, date);
+    const r = pv && pv.position;
+    if (!r || typeof r.x !== 'number') return null;
+    const g = SAT.gstime(date);
+    const x = r.x * Math.cos(g) + r.y * Math.sin(g);
+    const y = -r.x * Math.sin(g) + r.y * Math.cos(g);
+    const z = r.z;
+    const phi = obs.lat * RAD;
+    const lam = obs.lon * RAD;
+    const a = 6378.137;
+    const e2 = (1 / 298.257223563) * (2 - 1 / 298.257223563);
+    const N = a / Math.sqrt(1 - e2 * Math.sin(phi) ** 2);
+    const h = 0.45;
+    const ox = (N + h) * Math.cos(phi) * Math.cos(lam);
+    const oy = (N + h) * Math.cos(phi) * Math.sin(lam);
+    const oz = (N * (1 - e2) + h) * Math.sin(phi);
+    const dx = x - ox;
+    const dy = y - oy;
+    const dz = z - oz;
+    const east = -Math.sin(lam) * dx + Math.cos(lam) * dy;
+    const north = -Math.sin(phi) * Math.cos(lam) * dx - Math.sin(phi) * Math.sin(lam) * dy + Math.cos(phi) * dz;
+    const up = Math.cos(phi) * Math.cos(lam) * dx + Math.cos(phi) * Math.sin(lam) * dy + Math.sin(phi) * dz;
+    const range = Math.hypot(dx, dy, dz);
+    // Erdschatten (zylindrisch genähert)
+    const sun = sunPosition(date);
+    const sx = Math.cos(sun.dec * RAD) * Math.cos(sun.ra * RAD);
+    const sy = Math.cos(sun.dec * RAD) * Math.sin(sun.ra * RAD);
+    const sz = Math.sin(sun.dec * RAD);
+    const proj = r.x * sx + r.y * sy + r.z * sz;
+    const perp = Math.hypot(r.x - proj * sx, r.y - proj * sy, r.z - proj * sz);
+    const sunlit = proj > 0 || perp > 6371;
+    return { alt: Math.asin(up / range) / RAD, az: norm(Math.atan2(east, north) / RAD), sunlit, range };
+  }
+
+  // Nächster sichtbarer Überflug (ISS beleuchtet, Himmel dunkel genug, mind. 10° hoch)
+  function findNextPass(from, obs) {
+    const step = 30000;
+    let best = null;
+    for (let t = from.getTime(); t < from.getTime() + 48 * 3600000; t += step) {
+      const d = new Date(t);
+      const look = issLook(d, obs);
+      if (!look) return null;
+      const sunAlt = toHorizon(sunPosition(d).ra, sunPosition(d).dec, localSiderealDeg(d, obs.lon), obs.lat).alt;
+      const visible = look.alt > 10 && look.sunlit && sunAlt < -6;
+      if (visible) {
+        if (!best) best = { start: d, maxAlt: look.alt };
+        else best.maxAlt = Math.max(best.maxAlt, look.alt);
+      } else if (best) {
+        return best;
+      }
+    }
+    return best;
   }
 
   // ---------- Zeichnen ----------
@@ -314,6 +419,47 @@
       drawnStars.push({ x: p.x, y: p.y, planet: pl.name, mag: -3, alt: pl.h.alt });
     }
 
+    // ISS
+    const iss = issLook(date, place);
+    if (iss && iss.alt > -2) {
+      // Bahnspur ±6 Minuten
+      ctx.save();
+      ctx.setLineDash([3 * scale, 4 * scale]);
+      ctx.strokeStyle = 'rgba(143,123,255,0.55)';
+      ctx.lineWidth = 1.5 * scale;
+      ctx.beginPath();
+      let pen = false;
+      for (let k = -360; k <= 360; k += 15) {
+        const l = issLook(new Date(date.getTime() + k * 1000), place);
+        if (!l || l.alt < 0) { pen = false; continue; }
+        const q = project(l.alt, l.az, R, c);
+        if (pen) ctx.lineTo(q.x, q.y); else ctx.moveTo(q.x, q.y);
+        pen = true;
+      }
+      ctx.stroke();
+      ctx.restore();
+      if (iss.alt > 0) {
+        const p = project(iss.alt, iss.az, R, c);
+        const bright = iss.sunlit && sunH.alt < -6;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.fillStyle = bright ? '#ffffff' : '#b3a6ff';
+        ctx.shadowColor = bright ? '#ffffff' : '#8f7bff';
+        ctx.shadowBlur = 12 * scale;
+        ctx.fillRect(-2.5 * scale, -2.5 * scale, 5 * scale, 5 * scale); // Rumpf
+        ctx.fillStyle = bright ? '#cfe0ff' : '#8f7bff';
+        ctx.fillRect(-11 * scale, -4 * scale, 6 * scale, 8 * scale); // Sonnensegel links
+        ctx.fillRect(5 * scale, -4 * scale, 6 * scale, 8 * scale); // Sonnensegel rechts
+        ctx.restore();
+        ctx.font = `800 ${Math.round(10 * scale + 3)}px system-ui, sans-serif`;
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = '#c9c0ff';
+        ctx.fillText('ISS', p.x + 14 * scale, p.y);
+        drawnStars.push({ x: p.x, y: p.y, iss: true, mag: -4, alt: iss.alt });
+      }
+    }
+
     // Mond
     const moon = moonPosition(date);
     const moonH = toHorizon(moon.ra, moon.dec, lst, place.lat);
@@ -380,7 +526,7 @@
       ctx.fillText(label, c - (R + 16) * Math.sin(a), c - (R + 16) * Math.cos(a));
     }
 
-    updateInfo(date, sunH, moonH, phase, lst, planets);
+    updateInfo(date, sunH, moonH, phase, lst, planets, iss);
   }
 
   // ---------- Infos neben dem Himmel ----------
@@ -393,8 +539,28 @@
     return `${WOCHENTAGE[parts.weekday] || parts.weekday}, ${parts.day}. ${parts.month} um ${parts.hour}:${parts.minute}`;
   }
 
-  function updateInfo(date, sunH, moonH, phase, lst, planets) {
+  function updateInfo(date, sunH, moonH, phase, lst, planets, iss) {
     els.when.textContent = `${place.name} · ${swissDate(date)}${offsetHours === 0 ? ' (jetzt)' : ''}`;
+
+    if (els.iss) {
+      if (!issRec) {
+        els.iss.textContent = 'ISS: Bahndate werded glade …';
+      } else {
+        let now;
+        if (iss && iss.alt > 0) {
+          now = iss.sunlit && sunH.alt < -6
+            ? `ISS: ${Math.round(iss.alt)}° über em Horizont – grad sichtbar! ✨`
+            : `ISS: ${Math.round(iss.alt)}° über em Horizont, aber grad nöd sichtbar.`;
+        } else {
+          now = 'ISS: grad unter em Horizont.';
+        }
+        const key = `${place.lat},${place.lon},${Math.floor(date.getTime() / 300000)}`;
+        if (key !== nextPassKey) { nextPass = findNextPass(date, place); nextPassKey = key; }
+        const visibleNow = iss && iss.alt > 0 && iss.sunlit && sunH.alt < -6;
+        const passText = nextPass && !visibleNow ? ` Nächscht sichtbar: ${swissDate(nextPass.start)} (bis ${Math.round(nextPass.maxAlt)}° hoch).` : '';
+        els.iss.textContent = now + passText;
+      }
+    }
 
     const vis = planets.filter((p) => p.h.alt > 0).sort((a, b) => b.h.alt - a.h.alt);
     if (els.planets) {
@@ -423,6 +589,7 @@
   // ---------- Stern-Info beim Antippen ----------
   function starLabel(s) {
     if (s.moon) return '🌙 Mond';
+    if (s.iss) return '🛰️ <strong>ISS</strong><br>Internationali Raumstation';
     if (s.planet) return `🪐 <strong>${s.planet}</strong><br>Planet`;
     const n = DATA.names[s.i];
     const star = DATA.stars[s.i];
@@ -517,5 +684,11 @@
   setOffsetLabel();
   draw();
   // Live mitlaufen lassen
-  setInterval(() => { if (offsetHours === 0) draw(); }, 30000);
+  let lastFull = 0;
+  setInterval(() => {
+    if (offsetHours !== 0) return;
+    const look = issLook(new Date(), place);
+    if ((look && look.alt > -2) || Date.now() - lastFull > 30000) { lastFull = Date.now(); draw(); }
+  }, 2000);
+  loadIss();
 })();
