@@ -679,7 +679,7 @@ h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); margin: 0.6rem 0 1rem; letter-spacin
 .flyer.fly { animation: fly 3.2s ease-in-out forwards; }
 @keyframes fly {
   0% { transform: translate(-200px, 70vh) rotate(0); }
-  50% { transform: translate(calc(50vw - 40px), 10vh) rotate(540deg); }
+  50% { transform: translate(calc(50vw - 40px), calc(5.5rem + 60px)) rotate(540deg); } /* knapp unter der Meldung */
   100% { transform: translate(calc(100vw + 200px), 70vh) rotate(1080deg); }
 }
 .flyer.jump { animation: jump 3.2s ease-in-out forwards; }
@@ -710,6 +710,7 @@ h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); margin: 0.6rem 0 1rem; letter-spacin
   transition: opacity 0.3s, transform 0.3s;
   z-index: 300;
   pointer-events: none;
+  width: max-content;
   max-width: calc(100vw - 2rem);
   text-align: center;
 }
