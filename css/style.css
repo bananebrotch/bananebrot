@@ -915,3 +915,8 @@ body.page-sky #sky-now {
   box-shadow: 0 5px 0 #4b3fb8, 0 10px 22px rgba(123, 108, 255, 0.35);
 }
 body.page-sky #sky-now:active { box-shadow: 0 2px 0 #4b3fb8; }
+/* Sternehimmel: restliche Akzente ebenfalls violett */
+body.page-sky .nav-links a[aria-current="page"] { background: linear-gradient(135deg, #8f7bff, #4fb3ff); color: #fff; }
+body.page-sky .sky-list li { background: rgba(143, 123, 255, 0.2); }
+body.page-sky .logo-mark .lf { fill: #b3a6ff; }
+body.page-sky .logo-mark .ls { fill: #7f6fe0; }

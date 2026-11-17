@@ -22,6 +22,7 @@
   };
 
   const RAD = Math.PI / 180;
+  const LABELLED_STARS = ['Polarstern', 'Sirius'];
   const els = {
     place: document.getElementById('sky-place'),
     slider: document.getElementById('sky-time'),
@@ -276,6 +277,7 @@
 
     // Planeten
     const planets = planetPositions(date).map((pl) => ({ ...pl, h: toHorizon(pl.ra, pl.dec, lst, place.lat) }));
+    const placedLabels = [];
     for (const pl of planets) {
       if (pl.h.alt < 0 || !els.showPlanets.checked) continue;
       const st = PLANET_STYLE[pl.name];
@@ -302,7 +304,12 @@
         ctx.textAlign = 'left';
         ctx.textBaseline = 'middle';
         ctx.fillStyle = st.color;
-        ctx.fillText(pl.name, p.x + (st.size + 5) * scale, p.y + 10 * scale);
+        // Beschriftungen nahe beieinanderliegender Planeten nicht übereinander schreiben
+        let ly = p.y + 10 * scale;
+        const lx = p.x + (st.size + 5) * scale;
+        while (placedLabels.some((q) => Math.abs(q.x - lx) < 60 * scale && Math.abs(q.y - ly) < 14 * scale)) ly += 15 * scale;
+        placedLabels.push({ x: lx, y: ly });
+        ctx.fillText(pl.name, lx, ly);
       }
       drawnStars.push({ x: p.x, y: p.y, planet: pl.name, mag: -3, alt: pl.h.alt });
     }
@@ -350,10 +357,11 @@
       ctx.font = `600 ${Math.round(10 * scale + 2)}px system-ui, sans-serif`;
       ctx.textAlign = 'left';
       ctx.fillStyle = `rgba(255,236,190,${0.9 * dayFade})`;
+      // Nur zwei Sterne werden beschriftet: der Polarstern und Sirius, der hellste Stern am Himmel
       for (const s of drawnStars) {
-        if (s.moon || s.mag > 1.4) continue;
+        if (s.moon || s.planet) continue;
         const n = DATA.names[s.i];
-        if (n && n[0]) ctx.fillText(n[0], s.x + 6 * scale, s.y - 6 * scale);
+        if (n && LABELLED_STARS.includes(n[0])) ctx.fillText(n[0], s.x + 6 * scale, s.y - 6 * scale);
       }
     }
     ctx.restore();
