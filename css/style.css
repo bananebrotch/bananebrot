@@ -121,8 +121,20 @@ img { max-width: 100%; }
   font-weight: 600;
   transition: color 0.2s, background 0.2s;
 }
-.nav-links a:hover { color: var(--text); background: var(--surface); }
-.nav-links a[aria-current="page"] { color: var(--on-banana); background: var(--banana); }
+.nav-links a:hover { color: var(--text); }
+.nav-links a { position: relative; }
+.nav-links a[aria-current="page"] { color: var(--text); font-weight: 800; }
+/* aktive Seite: farbiger Strich unter dem Wort statt Box */
+.nav-links a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0.8rem;
+  right: 0.8rem;
+  bottom: 0.15rem;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--banana-deep);
+}
 
 /* Schoggi-Schalter */
 .theme-toggle {
@@ -874,7 +886,6 @@ body.page-sky .theme-toggle { display: none; }
 body.page-sky .logo-mark .lf { fill: #ffd23f; }
 body.page-sky .logo-mark .ls { fill: #b07a35; }
 body.page-sky .site-header { background: rgba(4, 9, 21, 0.6); }
-body.page-sky .nav-links a[aria-current="page"] { color: #1c120b; }
 
 .sky-hero { padding-top: 3rem; }
 .sky-hero h1 { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; }
@@ -913,7 +924,7 @@ body.page-sky #sky-now {
 }
 body.page-sky #sky-now:active { box-shadow: 0 2px 0 #4b3fb8; }
 /* Sternehimmel: restliche Akzente ebenfalls violett */
-body.page-sky .nav-links a[aria-current="page"] { background: linear-gradient(135deg, #8f7bff, #4fb3ff); color: #fff; }
+body.page-sky .nav-links a[aria-current="page"]::after { background: linear-gradient(90deg, #8f7bff, #4fb3ff); }
 body.page-sky .sky-list li { background: rgba(143, 123, 255, 0.2); }
 body.page-sky .logo-mark .lf { fill: #b3a6ff; }
 body.page-sky .logo-mark .ls { fill: #7f6fe0; }
@@ -1056,3 +1067,4 @@ body.page-imp .btn-primary { box-shadow: 0 5px 0 var(--banana-deep), 0 10px 24px
 .imp-rules { margin-bottom: 1rem; }
 .imp-rules summary { cursor: pointer; font-weight: 800; font-size: 1.1rem; }
 .imp-rules ol { margin: 1rem 0 0; padding-left: 1.25rem; color: var(--muted); display: grid; gap: 0.4rem; }
+body.page-imp .nav-links a[aria-current="page"]::after { background: #ff3b5c; box-shadow: 0 0 8px rgba(255, 59, 92, 0.7); }
