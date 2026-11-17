@@ -54,6 +54,7 @@ body {
   display: flex;
   flex-direction: column;
   transition: color 0.4s;
+  overflow-x: clip; /* nichts darf seitlich über den Bildschirm hinausragen */
 }
 
 main { flex: 1; }
@@ -285,6 +286,7 @@ h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); margin: 0.6rem 0 1rem; letter-spacin
   background: radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--banana) 55%, transparent), transparent 62%);
   display: grid;
   place-items: center;
+  overflow: hidden; /* drehende Strahlen dürfen nicht über den Rand ragen */
 }
 /* Drehende Sonnenstrahlen hinter dem Brot */
 .loaf-stage::before {
