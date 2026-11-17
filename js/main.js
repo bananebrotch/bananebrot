@@ -203,6 +203,22 @@
     });
   }));
 
+  // ---------- Versteckter Aufruf-Zähler im Guetschii ----------
+  // Zählt jeden Aufruf der Startseite über den Gratis-Dienst «Abacus».
+  // Klappt der Dienst einmal nicht, bleibt die Zeile einfach unsichtbar.
+  const hitsEl = document.querySelector('[data-hits]');
+  if (hitsEl && window.fetch) {
+    fetch('https://abacus.jasoncameron.dev/hit/bananebrot.ch/startseite')
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((data) => {
+        const n = Number(data && data.value);
+        if (!n) return;
+        hitsEl.textContent = `Scho ${n.toLocaleString('de-CH')}× ihglöst worde.`;
+        hitsEl.hidden = false;
+      })
+      .catch(() => { /* Zähler nicht erreichbar: nichts anzeigen */ });
+  }
+
   // ---------- Jahr im Footer ----------
   document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 
