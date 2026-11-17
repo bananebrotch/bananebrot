@@ -906,3 +906,12 @@ body.page-sky .crumb { background: #fff8d6 !important; border-radius: 50%; box-s
 #sky-moon { min-height: 3.2em; }
 #sky-time-label { display: inline-block; min-width: 6.5em; font-variant-numeric: tabular-nums; }
 @media (max-width: 600px) { .sky-when, #sky-moon { min-height: 4.8em; } }
+/* Sternehimmel: Bedienelemente in Astro-Violett statt Gelb */
+body.page-sky .sky-controls input[type="range"],
+body.page-sky .sky-checks input { accent-color: #8f7bff; }
+body.page-sky #sky-now {
+  background: linear-gradient(135deg, #8f7bff, #4fb3ff);
+  color: #fff;
+  box-shadow: 0 5px 0 #4b3fb8, 0 10px 22px rgba(123, 108, 255, 0.35);
+}
+body.page-sky #sky-now:active { box-shadow: 0 2px 0 #4b3fb8; }
