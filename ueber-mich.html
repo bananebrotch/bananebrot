@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Über mich · bananebrot.ch</title>
+  <meta name="description" content="Wer ist Oliver Thalmann? Steckbrief, Werdegang und was mich begeistert.">
+  <meta property="og:title" content="Über mich · bananebrot.ch">
+  <meta property="og:description" content="Wer ist Oliver Thalmann? Steckbrief, Werdegang und was mich begeistert.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍌</text></svg>">
+  <script>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}d.dataset.theme=t}catch(e){d.dataset.theme='light'}})();</script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a class="logo" href="index.html"><span class="logo-mark">🍌</span><span class="logo-name">bananebrot<span class="tld">.ch</span></span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Start</a></li>
+        <li><a href="ueber-mich.html" aria-current="page">Über mich</a></li>
+        <li><a href="projekte.html">Projekte</a></li>
+        <li><a href="spiel.html">Spiel 🎮</a></li>
+        <li><a href="rezept.html">Rezept 🍞</a></li>
+      </ul>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Schoggi-Modus umschalten">
+        <span class="tt-track"><span class="tt-knob"></span></span>
+        <span class="tt-label">Schoggi-Modus</span>
+      </button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menü öffnen">☰</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="about-hero">
+      <!-- ✏️ Foto einfügen: Bild als «img/oliver.jpg» hochladen und «OT» ersetzen durch:
+           <img src="img/oliver.jpg" alt="Oliver Thalmann"> -->
+      <div class="avatar reveal">OT</div>
+      <div>
+        <span class="eyebrow">👤 Über mich</span>
+        <h1>Das bin ich.</h1>
+        <!-- ✏️ Hier ein paar Sätze über dich -->
+        <p class="lead">Ich bin Oliver, lebe in der Schweiz und arbeite als <span class="todo">dein Beruf</span>. In meiner Freizeit <span class="todo">was du gerne machst</span>. Und ja: Ich habe eine Schwäche für Orcas, Walhaie und gutes Bananenbrot.</p>
+      </div>
+    </section>
+
+    <section class="section two-col">
+      <article class="card reveal">
+        <h2 class="section-title" style="font-size:1.6rem">📋 Steckbrief</h2>
+        <!-- ✏️ Steckbrief ausfüllen -->
+        <dl class="facts-list">
+          <dt>Name</dt><dd>Oliver Thalmann</dd>
+          <dt>Wohnort</dt><dd><span class="todo">Ort</span>, Schweiz 🇨🇭</dd>
+          <dt>Beruf</dt><dd><span class="todo">dein Beruf</span></dd>
+          <dt>Lieblingstiere</dt><dd>Orcas &amp; Walhaie 🐋</dd>
+          <dt>Lieblingsbrot</dt><dd>Bananenbrot, was sonst? 🍌</dd>
+          <dt>Superkraft</dt><dd><span class="todo">z. B. braune Bananen retten</span></dd>
+        </dl>
+      </article>
+
+      <article class="card reveal">
+        <h2 class="section-title" style="font-size:1.6rem">🧭 Mein Weg</h2>
+        <!-- ✏️ Stationen anpassen, ergänzen oder löschen -->
+        <ol class="timeline">
+          <li>
+            <span class="when">Heute</span>
+            <strong><span class="todo">Aktuelle Tätigkeit</span></strong>
+            <p>Was du gerade machst und was dir daran gefällt.</p>
+          </li>
+          <li>
+            <span class="when"><span class="todo">20XX</span></span>
+            <strong><span class="todo">Frühere Station</span></strong>
+            <p>Eine Ausbildung, ein Job oder ein wichtiges Projekt.</p>
+          </li>
+          <li>
+            <span class="when"><span class="todo">20XX</span></span>
+            <strong><span class="todo">Der Anfang</span></strong>
+            <p>Wie alles angefangen hat.</p>
+          </li>
+        </ol>
+      </article>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title reveal">Was mich begeistert</h2>
+      <p class="section-intro reveal">Ein paar Dinge, über die ich stundenlang reden könnte.</p>
+      <!-- ✏️ Deine Hobbys und Interessen -->
+      <ul class="chip-list reveal">
+        <li>🍌 Bananenbrot</li>
+        <li>🐋 Orcas</li>
+        <li>🦈 Walhaie</li>
+        <li>🏔️ <span class="todo">Hobby</span></li>
+        <li>💻 <span class="todo">Interesse</span></li>
+        <li>📚 <span class="todo">Lieblingsthema</span></li>
+        <li>☕ <span class="todo">Guilty Pleasure</span></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span data-year>2026</span> Oliver Thalmann · Frisch gebacken in der Schweiz 🇨🇭</p>
+      <p class="hint">Psst … klick mal fünfmal schnell aufs Logo.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

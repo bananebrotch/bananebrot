@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>bananebrot.ch · Oliver Thalmann</title>
+  <meta name="description" content="Die Website von Oliver Thalmann. Mit Bananenbrot-Spiel und, ja, einem Bananenbrot-Rezept.">
+  <meta property="og:title" content="bananebrot.ch · Oliver Thalmann">
+  <meta property="og:description" content="Die Website von Oliver Thalmann. Mit Bananenbrot-Spiel und, ja, einem Bananenbrot-Rezept.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍌</text></svg>">
+  <script>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}d.dataset.theme=t}catch(e){d.dataset.theme='light'}})();</script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a class="logo" href="index.html"><span class="logo-mark">🍌</span><span class="logo-name">bananebrot<span class="tld">.ch</span></span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" aria-current="page">Start</a></li>
+        <li><a href="ueber-mich.html">Über mich</a></li>
+        <li><a href="projekte.html">Projekte</a></li>
+        <li><a href="spiel.html">Spiel 🎮</a></li>
+        <li><a href="rezept.html">Rezept 🍞</a></li>
+      </ul>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Schoggi-Modus umschalten">
+        <span class="tt-track"><span class="tt-knob"></span></span>
+        <span class="tt-label">Schoggi-Modus</span>
+      </button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menü öffnen">☰</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="container hero">
+      <div>
+        <span class="eyebrow">🍌 Frisch aus dem Ofen</span>
+        <h1>Hoi, ich bin Oliver <span class="wave-hand">👋</span></h1>
+        <!-- ✏️ Diesen Text kannst du frei anpassen -->
+        <p class="lead">Willkommen auf <span class="highlight">bananebrot.ch</span>. Warum die Seite so heisst? Wieso nöd! Hier erfährst du, wer ich bin, woran ich arbeite, und du kannst eine Runde Brot backen.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="spiel.html">🎮 Bananenbrot backen</a>
+          <a class="btn btn-ghost" href="ueber-mich.html">Wer ist Oliver? →</a>
+        </div>
+        <p class="small-hint">Psst: Stups das Brot an. Und probier oben rechts den Schoggi-Modus aus.</p>
+      </div>
+      <div class="loaf-stage reveal">
+        <svg class="loaf-svg" viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ein fröhliches Bananenbrot mit einer Banane obendrauf">
+          <g class="steam">
+            <path d="M160 105 q-12 -15 0 -30 q12 -15 0 -30"/>
+            <path d="M200 95 q-12 -15 0 -30 q12 -15 0 -30"/>
+            <path d="M240 105 q-12 -15 0 -30 q12 -15 0 -30"/>
+          </g>
+          <ellipse cx="200" cy="322" rx="150" ry="14" fill="rgba(0,0,0,0.12)"/>
+          <g class="loaf">
+            <path d="M70 300 Q60 200 92 168 Q200 112 308 168 Q340 200 330 300 Q330 316 314 316 L86 316 Q70 316 70 300 Z" fill="#c07432"/>
+            <path d="M72 290 Q72 304 86 306 L314 306 Q328 304 328 290 Q330 312 314 316 L86 316 Q70 314 72 290 Z" fill="#9a5622"/>
+            <path d="M92 172 Q200 116 308 172 Q300 196 200 190 Q100 196 92 172 Z" fill="#8a4b1c"/>
+            <path d="M120 176 Q160 166 200 176 Q240 166 282 176" fill="none" stroke="#6b3612" stroke-width="5" stroke-linecap="round"/>
+            <g fill="#4a2a12">
+              <circle cx="110" cy="222" r="6"/><circle cx="292" cy="216" r="5"/><circle cx="118" cy="284" r="5"/>
+              <circle cx="286" cy="280" r="6"/><circle cx="200" cy="212" r="5"/><circle cx="252" cy="300" r="4"/>
+              <circle cx="150" cy="298" r="4"/><circle cx="318" cy="250" r="4"/><circle cx="84" cy="256" r="4"/>
+            </g>
+            <g class="banana-top">
+              <path d="M118 150 Q200 98 292 136 Q298 143 289 148 Q200 124 128 162 Q114 160 118 150 Z" fill="#ffd23f" stroke="#e0a100" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M140 150 Q200 120 270 138" fill="none" stroke="#f2b705" stroke-width="3" stroke-linecap="round"/>
+              <path d="M288 137 L301 128 L305 135 L292 145 Z" fill="#6b4a1f"/>
+              <circle cx="120" cy="156" r="3.5" fill="#4a2a12"/>
+            </g>
+            <g class="blink">
+              <ellipse cx="165" cy="240" rx="10" ry="13" fill="#2a170a"/>
+              <ellipse cx="235" cy="240" rx="10" ry="13" fill="#2a170a"/>
+              <circle cx="168" cy="235" r="3.5" fill="#fff"/>
+              <circle cx="238" cy="235" r="3.5" fill="#fff"/>
+            </g>
+            <ellipse cx="140" cy="266" rx="14" ry="8" fill="#ff8a7a" opacity=".55"/>
+            <ellipse cx="260" cy="266" rx="14" ry="8" fill="#ff8a7a" opacity=".55"/>
+            <path d="M182 262 Q200 286 218 262 Q200 270 182 262 Z" fill="#2a170a"/>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ===== Der Rezept-Zettel ===== -->
+    <section class="container" aria-label="Bananenbrot-Rezept">
+      <div class="recipe-note reveal">
+        <p class="mundart">Eigentli gits da kes Bananebrot-Rezept. Aber will du wahrschiinli genau wäge dem da bisch, hani dir da eis:</p>
+        <a class="btn btn-primary" href="rezept.html">🍞 Zum Rezept →</a>
+        <span class="stamp" aria-hidden="true">🍌</span>
+      </div>
+    </section>
+
+    <!-- ===== Was mich antreibt ===== -->
+    <section class="container section">
+      <h2 class="section-title reveal">Was mich ausmacht</h2>
+      <p class="section-intro reveal">Die wichtigsten Zutaten, kurz zusammengefasst.</p>
+      <div class="grid">
+        <!-- ✏️ Texte der drei Karten anpassen -->
+        <article class="card reveal">
+          <span class="icon">💡</span>
+          <h3>Eine Prise Neugier</h3>
+          <p>Ich will wissen, wie Dinge funktionieren, und probiere gerne Neues aus. Am liebsten so lange, bis es klappt.</p>
+        </article>
+        <article class="card reveal">
+          <span class="icon">🛠️</span>
+          <h3>Viel Machergeist</h3>
+          <p>Ideen sind gut, umgesetzte Ideen sind besser. Ich packe an und bringe Projekte ins Ziel.</p>
+        </article>
+        <article class="card reveal">
+          <span class="icon">🍫</span>
+          <h3>Ein Löffel Humor</h3>
+          <p>Wer seine Website bananebrot.ch nennt, nimmt nicht alles bierernst. Das Leben ist zu kurz für langweilige Domains.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== Wusstest du? ===== -->
+    <section class="container section">
+      <div class="card fact-box reveal">
+        <span class="big-emoji" aria-hidden="true">🍌</span>
+        <div>
+          <h2>Bananen-Wissen</h2>
+          <p class="fact-text" data-fact aria-live="polite">Bananen sind botanisch gesehen Beeren. Erdbeeren dagegen sind keine.</p>
+        </div>
+        <button class="btn btn-ghost" type="button" data-fact-next>Noch ein Fakt 🍌</button>
+      </div>
+    </section>
+
+    <!-- ===== Kontakt ===== -->
+    <section class="container section" id="kontakt">
+      <div class="card contact reveal">
+        <h2 class="section-title">Lust auf einen Schwatz?</h2>
+        <p class="section-intro" style="margin-inline:auto">Ob Idee, Frage oder dein bestes Bananenbrot-Foto: Schreib mir!</p>
+        <div class="btn-row">
+          <!-- ✏️ E-Mail-Adresse anpassen (die Gratis-Adresse von Infomaniak) -->
+          <a class="btn btn-primary" href="mailto:hallo@bananebrot.ch">✉️ hallo@bananebrot.ch</a>
+          <!-- ✏️ Link zu deinem LinkedIn-Profil einsetzen oder diese Zeile löschen -->
+          <a class="btn btn-ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span data-year>2026</span> Oliver Thalmann · Frisch gebacken in der Schweiz 🇨🇭</p>
+      <p class="hint">Psst … tippe mal «banane».</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

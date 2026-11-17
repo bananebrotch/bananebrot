@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projekte · bananebrot.ch</title>
+  <meta name="description" content="Projekte von Oliver Thalmann.">
+  <meta property="og:title" content="Projekte · bananebrot.ch">
+  <meta property="og:description" content="Projekte von Oliver Thalmann.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍌</text></svg>">
+  <script>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}d.dataset.theme=t}catch(e){d.dataset.theme='light'}})();</script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a class="logo" href="index.html"><span class="logo-mark">🍌</span><span class="logo-name">bananebrot<span class="tld">.ch</span></span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Start</a></li>
+        <li><a href="ueber-mich.html">Über mich</a></li>
+        <li><a href="projekte.html" aria-current="page">Projekte</a></li>
+        <li><a href="spiel.html">Spiel 🎮</a></li>
+        <li><a href="rezept.html">Rezept 🍞</a></li>
+      </ul>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Schoggi-Modus umschalten">
+        <span class="tt-track"><span class="tt-knob"></span></span>
+        <span class="tt-label">Schoggi-Modus</span>
+      </button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menü öffnen">☰</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="section" style="padding-top:3.5rem">
+      <span class="eyebrow">🧰 Projekte</span>
+      <h1>Woran ich arbeite</h1>
+      <p class="section-intro">Eine Auswahl von Dingen, die ich gebaut, gestaltet oder angepackt habe.</p>
+
+      <div class="filters" role="group" aria-label="Projekte filtern">
+        <button class="chip active" type="button" data-filter="alle" aria-pressed="true">Alle</button>
+        <button class="chip" type="button" data-filter="web" aria-pressed="false">💻 Web</button>
+        <button class="chip" type="button" data-filter="kreativ" aria-pressed="false">🎨 Kreativ</button>
+        <button class="chip" type="button" data-filter="sonstiges" aria-pressed="false">✨ Sonstiges</button>
+      </div>
+
+      <!-- ✏️ Projekt-Karten: kopieren, anpassen, löschen.
+           data-tags bestimmt, bei welchem Filter die Karte erscheint (web, kreativ, sonstiges). -->
+      <div class="grid">
+        <article class="card project reveal" data-tags="web kreativ">
+          <div class="project-thumb" aria-hidden="true">🍌</div>
+          <h3>bananebrot.ch</h3>
+          <p>Diese Website: von Hand gebaut mit HTML, CSS und JavaScript. Mit Schoggi-Modus, Back-Spiel, einem echten Rezept und ein paar versteckten Überraschungen.</p>
+          <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+          <a class="more" href="spiel.html">Zum Spiel →</a>
+        </article>
+
+        <article class="card project reveal" data-tags="kreativ">
+          <div class="project-thumb crust" aria-hidden="true">🎨</div>
+          <h3><span class="todo">Projekttitel</span></h3>
+          <p>Beschreibe in zwei, drei Sätzen, worum es ging, was du gemacht hast und was dabei herausgekommen ist.</p>
+          <div class="tags"><span class="tag">Stichwort</span><span class="tag">Stichwort</span></div>
+          <a class="more" href="#">Mehr erfahren →</a>
+        </article>
+
+        <article class="card project reveal" data-tags="web">
+          <div class="project-thumb choc" aria-hidden="true">🚀</div>
+          <h3><span class="todo">Projekttitel</span></h3>
+          <p>Noch ein Projekt, auf das du stolz bist. Ein Link zu GitHub, einer Website oder Fotos passt gut dazu.</p>
+          <div class="tags"><span class="tag">Stichwort</span><span class="tag">Stichwort</span></div>
+          <a class="more" href="#">Mehr erfahren →</a>
+        </article>
+
+        <article class="card project reveal" data-tags="sonstiges">
+          <div class="project-thumb mint" aria-hidden="true">🌱</div>
+          <h3><span class="todo">Projekttitel</span></h3>
+          <p>Etwas ganz anderes: ein Verein, eine Reise, ein Hobby-Projekt oder eine Challenge.</p>
+          <div class="tags"><span class="tag">Stichwort</span></div>
+          <a class="more" href="#">Mehr erfahren →</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span data-year>2026</span> Oliver Thalmann · Frisch gebacken in der Schweiz 🇨🇭</p>
+      <p class="hint">Psst … tippe mal «schoggi».</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
