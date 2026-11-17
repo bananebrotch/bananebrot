@@ -64,7 +64,7 @@
     const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
     applyTheme(next);
     store.set('theme', next);
-    toast(next === 'dark' ? '🍫 Schoggi-Modus: jetzt wird’s dunkel und süss.' : '🍌 Banane-Modus: zurück ins Sonnenlicht!');
+    toast(next === 'dark' ? 'Schoggi-Modus' : 'Banane-Modus');
   }));
 
   // ---------- Mobiles Menü ----------
