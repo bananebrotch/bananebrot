@@ -1068,3 +1068,5 @@ body.page-imp .btn-primary { box-shadow: 0 5px 0 var(--banana-deep), 0 10px 24px
 .imp-rules summary { cursor: pointer; font-weight: 800; font-size: 1.1rem; }
 .imp-rules ol { margin: 1rem 0 0; padding-left: 1.25rem; color: var(--muted); display: grid; gap: 0.4rem; }
 body.page-imp .nav-links a[aria-current="page"]::after { background: #ff3b5c; box-shadow: 0 0 8px rgba(255, 59, 92, 0.7); }
+/* Hinweistexte in Boxen: kleiner Abstand nach oben (wie beim Sternehimmel) */
+.card .small-hint { margin-top: 0.75rem; }
