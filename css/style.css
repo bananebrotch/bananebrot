@@ -1260,7 +1260,29 @@ body.page-sky .sky-panel h2 { font-family: "Orbitron", system-ui, sans-serif; fo
 }
 .v3-stub::before { left: -16px; }
 .v3-stub::after { right: -16px; }
-.teaser-rezept:hover .v3-stub { transform: translateY(4px) rotate(-1.5deg); }
+/* Schere schneidet beim Darüberfahren den Streifen ab */
+.v3-scissors {
+  position: absolute;
+  left: -48px;
+  bottom: calc(3.6rem - 14px);
+  width: 46px;
+  height: 29px;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+}
+.v3-scissors svg { width: 100%; height: 100%; display: block; }
+.v3-scissors svg path { transform-box: fill-box; transform-origin: 0% 50%; }
+.v3-stub { transform-origin: 0% 0%; transition: transform 0.45s cubic-bezier(0.3, 1.4, 0.5, 1) 0s, opacity 0.3s; }
+.teaser-rezept:hover .v3-scissors { animation: snip-across 0.9s ease-in-out forwards; }
+.teaser-rezept:hover .v3-scissors svg path:first-of-type { animation: snip-blade 0.18s ease-in-out 5 alternate; }
+.teaser-rezept:hover .v3-stub { transform: translateY(10px) rotate(-3deg); transition-delay: 0.8s; }
+@keyframes snip-across {
+  0% { left: -48px; opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: calc(100% + 4px); opacity: 0; }
+}
+@keyframes snip-blade { from { transform: rotate(0deg); } to { transform: rotate(-12deg); } }
 
 /* Impostor: Text, der beim Darüberfahren glitcht */
 .v3-glitch-link {
@@ -1307,3 +1329,5 @@ body.page-sky .sky-panel h2 { font-family: "Orbitron", system-ui, sans-serif; fo
 @keyframes twinkle-star { 0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; } 50% { transform: scale(0.75) rotate(45deg); opacity: 0.8; } }
 .teaser-sky:hover .v3-comet { transform: translate(18px, -14px); }
 h1, .section-title, .teaser-title, .coupon-title { font-weight: 800; }
+.v3-sky-arrow { display: inline-block; transition: transform 0.25s; }
+.teaser-sky:hover .v3-sky-arrow { transform: translateX(5px); }
