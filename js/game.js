@@ -237,6 +237,7 @@
 
   function bake() {
     loaves++;
+    if (window.countBakedLoaf) window.countBakedLoaf(); // weltweiter Bananebrot-Zähler
     score += 30;
     have = { banana: 0, egg: 0, flour: 0, butter: 0 };
     floater(bowl.x, H - 150, '🍞 Bananenbrot gebacken! +30', '#8a4b1c', 28);
