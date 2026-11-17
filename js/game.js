@@ -464,9 +464,9 @@
     ctx.textBaseline = 'top';
     ctx.textAlign = 'left';
     ctx.fillStyle = p.hud;
-    ctx.font = '800 28px system-ui, sans-serif';
+    ctx.font = '800 28px "Inter", system-ui, sans-serif';
     ctx.fillText(`Punkte: ${score}`, 20, 16);
-    ctx.font = '600 16px system-ui, sans-serif';
+    ctx.font = '600 16px "Inter", system-ui, sans-serif';
     ctx.globalAlpha = 0.75;
     ctx.fillText(`Rekord: ${best}`, 22, 50);
     ctx.globalAlpha = 1;
@@ -474,7 +474,7 @@
     ctx.textAlign = 'right';
     ctx.font = `26px ${EMOJI_FONT}`;
     ctx.fillText('❤️'.repeat(Math.max(0, lives)) + '🤍'.repeat(Math.max(0, 3 - lives)), W - 20, 16);
-    ctx.font = '700 18px system-ui, sans-serif';
+    ctx.font = '700 18px "Inter", system-ui, sans-serif';
     ctx.fillText(`🍞 × ${loaves}`, W - 22, 52);
 
     // Rezept-Karte
@@ -487,7 +487,7 @@
     ctx.textAlign = 'left';
     ctx.textBaseline = 'middle';
     ctx.fillStyle = p.hud;
-    ctx.font = '700 15px system-ui, sans-serif';
+    ctx.font = '700 15px "Inter", system-ui, sans-serif';
     ctx.fillText('Rezept:', 30, 98);
     entries.forEach(([emoji, got, need], i) => {
       const cx = 96 + i * cellW;
@@ -495,7 +495,7 @@
       ctx.globalAlpha = got >= need ? 1 : 0.55;
       ctx.fillText(emoji, cx, 99);
       ctx.globalAlpha = 1;
-      ctx.font = '700 14px system-ui, sans-serif';
+      ctx.font = '700 14px "Inter", system-ui, sans-serif';
       ctx.fillStyle = got >= need ? '#2e7d32' : p.hud;
       ctx.fillText(got >= need ? '✓' : `${got}/${need}`, cx + 27, 99);
       ctx.fillStyle = p.hud;
@@ -509,7 +509,7 @@
       ctx.fillRect(W - 20 - bw, 84, bw * (power / 8), 8);
       ctx.textAlign = 'right';
       ctx.textBaseline = 'top';
-      ctx.font = '700 13px system-ui, sans-serif';
+      ctx.font = '700 13px "Inter", system-ui, sans-serif';
       ctx.fillStyle = p.hud;
       ctx.fillText('✨ Goldene Banane ×2', W - 20, 96);
     }
@@ -542,7 +542,7 @@
     ctx.textBaseline = 'middle';
     for (const f of floaters) {
       ctx.globalAlpha = clamp(f.life, 0, 1);
-      ctx.font = `800 ${f.size}px system-ui, ${EMOJI_FONT}`;
+      ctx.font = `800 ${f.size}px "Inter", system-ui, ${EMOJI_FONT}`;
       ctx.lineWidth = 5;
       ctx.strokeStyle = 'rgba(255,255,255,0.85)';
       ctx.strokeText(f.text, f.x, f.y);

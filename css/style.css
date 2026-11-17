@@ -1,4 +1,8 @@
 /* ---------- Eigene Schriften (lokal gehostet, SIL Open Font License, siehe /fonts) ---------- */
+@font-face { font-family: "Inter"; src: url("../fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 500 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/inter-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/inter-latin-800-normal.woff2") format("woff2"); font-weight: 800 900; font-style: normal; font-display: swap; }
 @font-face { font-family: "Inter Display"; src: url("../fonts/inter-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; font-display: swap; }
 @font-face { font-family: "Orbitron"; src: url("../fonts/orbitron-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
 @font-face { font-family: "Orbitron"; src: url("../fonts/orbitron-latin-900-normal.woff2") format("woff2"); font-weight: 900; font-style: normal; font-display: swap; }
@@ -23,8 +27,8 @@
   --border: rgba(59, 36, 20, 0.12);
   --shadow: 0 12px 30px rgba(120, 72, 20, 0.12);
   --radius: 20px;
-  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-display: ui-rounded, "SF Pro Rounded", "Nunito", "Segoe UI", system-ui, sans-serif;
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-display: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   color-scheme: light;
 }
 
@@ -1178,3 +1182,128 @@ body.page-sky .sky-hero h1,
 body.page-sky .sky-hero h1 { font-size: clamp(2rem, 7.5vw, 3.8rem); }
 .teaser-sky .teaser-title { font-size: clamp(1.6rem, 4.2vw, 2.3rem); }
 body.page-sky .sky-panel h2 { font-family: "Orbitron", system-ui, sans-serif; font-weight: 700; font-size: 1.05rem; letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* ---------- Startseite neu: Hero-Titel, WIP-Abzeichen, drei Karten ---------- */
+.wip-badge { display: inline-block; font-weight: 700; font-size: 0.9rem; color: var(--accent); background: var(--surface); border: 1px dashed var(--banana-deep); padding: 0.3rem 0.85rem; border-radius: 999px; }
+.home-title { font-size: clamp(2.4rem, 5.6vw, 4rem); max-width: 14ch; }
+.offers { padding-top: 1rem; }
+.offers-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; align-items: stretch; }
+@media (max-width: 960px) { .offers-grid { grid-template-columns: 1fr; } }
+.offers .teaser { min-height: 340px; }
+.teaser-rezept {
+  color: #3b2414;
+  background: radial-gradient(circle at 100% 0%, rgba(255, 210, 63, 0.55), transparent 55%), #fffbea;
+  border: 3px dashed #f2b705;
+}
+.teaser-rezept .teaser-label { color: #9a5410; }
+.teaser-rezept .teaser-title { font-size: clamp(1.6rem, 3.2vw, 2.1rem); }
+.teaser-rezept .teaser-text { color: #7a5a3e; }
+.teaser-rezept .teaser-btn { background: #ffd23f; color: #3b2414; box-shadow: 0 4px 0 #f2b705, 0 8px 20px rgba(242, 183, 5, 0.3); }
+.teaser-fine { font-size: 0.72rem; color: #7a5a3e; opacity: 0.85; }
+.teaser .teaser-hits { margin: 0; text-align: left; font-size: 0.7rem; color: #7a5a3e; }
+.offers .teaser-title { font-size: clamp(1.6rem, 3.2vw, 2.2rem); }
+.offers .teaser-imp .teaser-title { letter-spacing: 0.06em; }
+.fact-box { padding: 1.1rem 1.5rem; }
+.fact-box .big-emoji { font-size: 2.2rem; }
+.fact-box h2 { font-size: 1.2rem; }
+.fact-text { font-size: 1rem; min-height: 0; }
+@media (max-width: 960px) { .offers .teaser { min-height: 0; } .offers .teaser-btn { margin-top: 0.6rem; } }
+
+/* Variante 1: Pfeil in der Ecke statt Knopf */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.offers .teaser { padding-bottom: 5.2rem; }
+.teaser-arrow {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  transition: transform 0.3s cubic-bezier(0.3, 1.5, 0.5, 1), box-shadow 0.3s;
+}
+.teaser-arrow svg { width: 22px; height: 22px; transition: transform 0.3s; }
+.teaser:hover .teaser-arrow,
+.teaser:focus-visible .teaser-arrow { transform: rotate(45deg) scale(1.08); }
+.teaser-rezept .teaser-arrow { background: #ffd23f; color: #3b2414; box-shadow: 0 4px 14px rgba(242, 183, 5, 0.45); }
+.teaser-imp .teaser-arrow { background: #ff3b5c; color: #fff; box-shadow: 0 0 22px rgba(255, 59, 92, 0.5); }
+.teaser-sky .teaser-arrow { background: linear-gradient(135deg, #8f7bff, #4fb3ff); color: #fff; box-shadow: 0 0 22px rgba(123, 108, 255, 0.5); }
+@media (max-width: 960px) { .offers .teaser { padding-bottom: 4.8rem; } .teaser-arrow { width: 46px; height: 46px; } }
+
+/* Variante 3: jede Karte mit eigenem Clou */
+/* Guetschii: perforierter Abriss-Streifen */
+.offers .teaser-rezept { padding-bottom: 5.4rem; }
+.v3-stub {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3.6rem;
+  display: grid;
+  place-items: center;
+  background: #ffd23f;
+  border-top: 3px dashed #c99700;
+  font-weight: 800;
+  color: #3b2414;
+  transition: transform 0.3s cubic-bezier(0.3, 1.5, 0.5, 1);
+}
+.v3-stub::before,
+.v3-stub::after {
+  content: "";
+  position: absolute;
+  top: -14px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--bg2);
+}
+.v3-stub::before { left: -16px; }
+.v3-stub::after { right: -16px; }
+.teaser-rezept:hover .v3-stub { transform: translateY(4px) rotate(-1.5deg); }
+
+/* Impostor: Text, der beim Darüberfahren glitcht */
+.v3-glitch-link {
+  position: absolute;
+  left: 1.75rem;
+  bottom: 1.6rem;
+  font-family: "Inter Display", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: 0.06em;
+  color: #ff5c7a;
+  text-shadow: 0 0 14px rgba(255, 59, 92, 0.6);
+}
+.v3-glitch-link::before,
+.v3-glitch-link::after { content: attr(data-text); position: absolute; inset: 0; opacity: 0; }
+.v3-glitch-link::before { color: #4fd1ff; clip-path: inset(0 0 50% 0); }
+.v3-glitch-link::after { color: #fff; clip-path: inset(50% 0 0 0); }
+.teaser-imp:hover .v3-glitch-link::before { opacity: 1; animation: v3g 0.4s steps(2) infinite; }
+.teaser-imp:hover .v3-glitch-link::after { opacity: 1; animation: v3g 0.3s steps(2) infinite reverse; }
+@keyframes v3g { 0% { transform: translate(-3px, 0); } 50% { transform: translate(3px, -1px); } 100% { transform: translate(-1px, 1px); } }
+
+/* Sternehimmel: Sternschnuppe */
+.v3-sky-link {
+  position: absolute;
+  left: 1.75rem;
+  bottom: 1.6rem;
+  font-family: "Orbitron", "Inter", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  color: #cfd9ff;
+}
+.v3-comet {
+  position: absolute;
+  right: 1.1rem;
+  bottom: 1rem;
+  width: 120px;
+  height: 60px;
+  filter: drop-shadow(0 0 8px rgba(158, 201, 255, 0.8));
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+.v3-comet svg { width: 100%; height: 100%; overflow: visible; }
+.v3-star { transform-box: fill-box; transform-origin: center; animation: twinkle-star 2.4s ease-in-out infinite; }
+@keyframes twinkle-star { 0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; } 50% { transform: scale(0.75) rotate(45deg); opacity: 0.8; } }
+.teaser-sky:hover .v3-comet { transform: translate(18px, -14px); }
+h1, .section-title, .teaser-title, .coupon-title { font-weight: 800; }

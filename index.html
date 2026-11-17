@@ -18,9 +18,9 @@
   <meta property="og:image:alt" content="bananebrot.ch – Bananebrot, Impostor &amp; Sternehimmel">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://bananebrot.ch/img/og-start.jpg">
-  <link rel="icon" type="image/svg+xml" href="logo.svg?v=202611172230">
+  <link rel="icon" type="image/svg+xml" href="logo.svg?v=202611172256">
   <script>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}d.dataset.theme=t}catch(e){d.dataset.theme='light'}})();</script>
-  <link rel="stylesheet" href="css/style.css?v=202611172230">
+  <link rel="stylesheet" href="css/style.css?v=202611172256">
 </head>
 <body>
 
@@ -44,7 +44,8 @@
   <main>
     <section class="container hero">
       <div>
-        <h1>WIP – bald gits meh.</h1>
+        <span class="wip-badge">🚧 WIP – bald gits meh.</span>
+        <h1 class="home-title">Bananebrot, Impostor &amp; Sterne.</h1>
         <!-- ✏️ Diesen Text kannst du frei anpassen -->
         <p class="lead">Warum die Site so heisst? Wieso nöd? Es git Spiel, Wüsse über Banane und ja, sogar au es Rezept.</p>
       </div>
@@ -86,38 +87,32 @@
       </div>
     </section>
 
-    <!-- ===== Rezept-Gutschein ===== -->
-    <section class="container" aria-label="Bananenbrot-Rezept">
-      <div class="coupon reveal">
-        <div class="coupon-left" aria-hidden="true">
-          <svg class="coupon-logo" viewBox="35 37 140 140"><g fill="#111"><circle cx="72" cy="78" r="13"/><circle cx="128" cy="78" r="13"/><path d="M44 112 Q100 178 156 112 Q160 106 154 104 Q100 150 50 104 Q42 104 44 112 Z"/><path d="M154 104 L164 96 L168 102 L158 110 Z"/></g></svg>
-        </div>
-        <div class="coupon-right">
-          <span class="coupon-label">Guetschii</span>
-          <h2 class="coupon-title">1 Bananebrot-Rezept</h2>
-          <p class="coupon-text">Eigentlich isch die Site nöd für das denkt. Aber da du vermuetlich wege dem da bisch, hani dir eis:</p>
-          <div class="coupon-cta"><a class="btn btn-primary" href="/rezept">Jetzt iilöse →</a></div>
-          <p class="coupon-fine">Unbeschränkt gültig · Nöd mit anderne Rezept kombinierbar · Bruuni Banane werded empfohle</p>
-          <!-- Zähler: zählt jeden Aufruf der Startseite («gebackene Brote») -->
-          <p class="coupon-hits" data-hits hidden></p>
-        </div>
-      </div>
-    </section>
 
-    <!-- ===== Teaser: Impostor & Sternehimmel (im Look der jeweiligen Seite) ===== -->
-    <section class="container section teasers" aria-label="Weitere Seiten">
-      <a class="teaser teaser-imp reveal" href="/impostor">
-        <span class="teaser-label">Partyspiel</span>
-        <strong class="teaser-title imp-glitch" data-text="IMPOSTOR">IMPOSTOR</strong>
-        <span class="teaser-text">Alli kenned s geheime Wort. Nur de Impostor nöd. Wer blufft am beschte?</span>
-        <span class="teaser-btn">Jetzt spiele →</span>
-      </a>
-      <a class="teaser teaser-sky reveal" href="/sterne">
-        <span class="teaser-label"><span class="live-dot" aria-hidden="true"></span> live berechnet</span>
-        <strong class="teaser-title">Sternehimmel</strong>
-        <span class="teaser-text">Was gseht mer grad am Himmel über de Schwiz? Sternbilder, Planete und d ISS.</span>
-        <span class="teaser-btn">Zum Himmel →</span>
-      </a>
+
+    <!-- ===== Was gits da? Drei gleichwertige Karten ===== -->
+    <section class="container section offers" aria-labelledby="offers-title">
+      <h2 class="section-title reveal" id="offers-title">Was gits da?</h2>
+      <div class="offers-grid">
+        <a class="teaser teaser-rezept reveal" href="/rezept">
+          <span class="teaser-label">Guetschii</span>
+          <strong class="teaser-title">Bananebrot-Rezept</strong>
+          <span class="teaser-text">Eigentlich isch die Site nöd für das denkt. Aber da du vermuetlich wege dem da bisch, hani dir eis:</span>
+          <p class="coupon-hits teaser-hits" data-hits hidden></p>
+          <span class="sr-only">Rezept ihlöse</span><span class="v3-stub" aria-hidden="true"><span>✂️ Jetzt ihlöse</span></span>
+        </a>
+        <a class="teaser teaser-imp reveal" href="/impostor">
+          <span class="teaser-label">Partyspiel</span>
+          <strong class="teaser-title imp-glitch" data-text="IMPOSTOR">IMPOSTOR</strong>
+          <span class="teaser-text">Alli kenned s geheime Wort. Nur de Impostor nöd. Wer blufft am beschte?</span>
+          <span class="sr-only">Impostor spiele</span><span class="v3-glitch-link" aria-hidden="true" data-text="Spiele →">Spiele →</span>
+        </a>
+        <a class="teaser teaser-sky reveal" href="/sterne">
+          <span class="teaser-label"><span class="live-dot" aria-hidden="true"></span> live berechnet</span>
+          <strong class="teaser-title">Sternehimmel</strong>
+          <span class="teaser-text">Was gseht mer grad am Himmel über de Schwiz? Sternbilder, Planete und d ISS.</span>
+          <span class="sr-only">Zum Sternehimmel</span><span class="v3-sky-link" aria-hidden="true">Zum Himmel</span><span class="v3-comet" aria-hidden="true"><svg viewBox="0 0 140 70"><defs><linearGradient id="tail" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#8f7bff" stop-opacity="0"/><stop offset=".6" stop-color="#9ec9ff" stop-opacity=".55"/><stop offset="1" stop-color="#ffffff"/></linearGradient></defs><path d="M4 66 L118 16 L123 26 Z" fill="url(#tail)"/><g class="v3-star"><path d="M121 21 l3 -11 l3 11 l11 3 l-11 3 l-3 11 l-3 -11 l-11 -3 z" fill="#fff"/><circle cx="124" cy="24" r="4" fill="#fff"/></g></svg></span>
+        </a>
+      </div>
     </section>
 
     <!-- ===== Vorerst ausgeblendet: «Was mich ausmacht» =====
@@ -159,6 +154,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=202611172230"></script>
+  <script src="js/main.js?v=202611172256"></script>
 </body>
 </html>

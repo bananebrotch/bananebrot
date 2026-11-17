@@ -406,7 +406,7 @@
       }
       ctx.restore();
       {
-        ctx.font = `700 ${Math.round(10 * scale + 3)}px system-ui, sans-serif`;
+        ctx.font = `700 ${Math.round(10 * scale + 3)}px "Inter", system-ui, sans-serif`;
         ctx.textAlign = 'left';
         ctx.textBaseline = 'middle';
         ctx.fillStyle = st.color;
@@ -452,7 +452,7 @@
         ctx.fillRect(-11 * scale, -4 * scale, 6 * scale, 8 * scale); // Sonnensegel links
         ctx.fillRect(5 * scale, -4 * scale, 6 * scale, 8 * scale); // Sonnensegel rechts
         ctx.restore();
-        ctx.font = `800 ${Math.round(10 * scale + 3)}px system-ui, sans-serif`;
+        ctx.font = `800 ${Math.round(10 * scale + 3)}px "Inter", system-ui, sans-serif`;
         ctx.textAlign = 'left';
         ctx.textBaseline = 'middle';
         ctx.fillStyle = '#c9c0ff';
@@ -490,7 +490,7 @@
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       // Sternbilder (nur wenn «Sternebilder» angekreuzt)
-      ctx.font = `600 ${Math.round(11 * scale + 2)}px system-ui, sans-serif`;
+      ctx.font = `600 ${Math.round(11 * scale + 2)}px "Inter", system-ui, sans-serif`;
       ctx.fillStyle = `rgba(170,200,255,${0.55 * dayFade})`;
       if (els.showCons.checked) for (const key of Object.keys(DATA.cons)) {
         const [name, ra, dec, rank] = DATA.cons[key];
@@ -501,7 +501,7 @@
         ctx.fillText(name, p.x, p.y);
       }
       // helle Sterne mit Namen
-      ctx.font = `600 ${Math.round(10 * scale + 2)}px system-ui, sans-serif`;
+      ctx.font = `600 ${Math.round(10 * scale + 2)}px "Inter", system-ui, sans-serif`;
       ctx.textAlign = 'left';
       ctx.fillStyle = `rgba(255,236,190,${0.9 * dayFade})`;
       // Nur zwei Sterne werden beschriftet: der Polarstern und Sirius, der hellste Stern am Himmel
@@ -517,7 +517,7 @@
     ctx.strokeStyle = 'rgba(160,190,255,0.18)';
     ctx.lineWidth = 1;
     ctx.beginPath(); ctx.arc(c, c, R, 0, Math.PI * 2); ctx.stroke();
-    ctx.font = `800 ${Math.round(13 * scale + 3)}px system-ui, sans-serif`;
+    ctx.font = `800 ${Math.round(13 * scale + 3)}px "Inter", system-ui, sans-serif`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillStyle = 'rgba(232,238,255,0.85)';
