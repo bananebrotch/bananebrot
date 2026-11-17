@@ -1027,7 +1027,7 @@ body.page-imp .btn-primary { box-shadow: 0 5px 0 var(--banana-deep), 0 10px 24px
 .imp-icon:disabled { opacity: 0.3; cursor: not-allowed; }
 
 .imp-settings { display: grid; gap: 0.9rem; margin: 1.5rem 0; padding-top: 1.25rem; border-top: 1px solid var(--border); }
-.imp-setting { display: grid; grid-template-columns: 1fr minmax(0, 1.2fr); align-items: center; gap: 1rem; font-weight: 700; }
+.imp-setting { display: grid; grid-template-columns: max-content minmax(0, 1fr); align-items: center; gap: 1rem; font-weight: 700; }
 .imp-stepper { display: flex; align-items: center; justify-content: flex-end; gap: 0.75rem; }
 .imp-stepper button { width: 2.4rem; height: 2.4rem; border-radius: 50%; border: 1px solid var(--border); background: rgba(255, 59, 92, 0.15); color: var(--text); font-size: 1.3rem; cursor: pointer; }
 .imp-stepper strong { font-size: 1.4rem; min-width: 1.5rem; text-align: center; }
@@ -1070,3 +1070,18 @@ body.page-imp .btn-primary { box-shadow: 0 5px 0 var(--banana-deep), 0 10px 24px
 body.page-imp .nav-links a[aria-current="page"]::after { background: #ff3b5c; box-shadow: 0 0 8px rgba(255, 59, 92, 0.7); }
 /* Hinweistexte in Boxen: kleiner Abstand nach oben (wie beim Sternehimmel) */
 .card .small-hint { margin-top: 0.75rem; }
+/* Auswahlfelder: eigener Pfeil mit Abstand zum Rand */
+.imp-setting select,
+.sky-controls select {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 2.6rem;
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  background-size: 12px 8px;
+  cursor: pointer;
+}
+.imp-setting select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23ff7a92' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+.sky-controls select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23a99bff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+.imp-setting select option,
+.sky-controls select option { background: var(--surface-solid); color: var(--text); }

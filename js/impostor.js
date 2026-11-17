@@ -63,7 +63,9 @@
     if (saved && Array.isArray(saved.players) && saved.players.length >= 3) players = saved.players;
     if (saved && saved.settings) settings = { ...settings, ...saved.settings };
   } catch (e) { /* egal */ }
-  if (players.length < 3) players = ['Spieler 1', 'Spieler 2', 'Spieler 3', 'Spieler 4'];
+  // Standardnamen («Spieler 3») sind nur Platzhalter, damit man direkt tippen kann
+  players = players.map((p) => (/^Spieler \d+$/.test(String(p).trim()) ? '' : p));
+  if (players.length < 3) players = ['', '', '', ''];
 
   const save = () => store.set('impostor-setup', JSON.stringify({ players, settings }));
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -88,7 +90,7 @@
         <ol class="imp-players">
           ${players.map((p, i) => `
             <li>
-              <input type="text" value="${esc(p)}" data-player="${i}" maxlength="20" aria-label="Name Spieler ${i + 1}">
+              <input type="text" value="${esc(p)}" placeholder="Spieler ${i + 1}" data-player="${i}" maxlength="20" autocomplete="off" aria-label="Name Spieler ${i + 1}">
               <button type="button" class="imp-icon" data-remove="${i}" aria-label="Spieler entfernen" ${players.length <= 3 ? 'disabled' : ''}>✕</button>
             </li>`).join('')}
         </ol>
@@ -128,11 +130,11 @@
       showSetup();
     }));
     app.querySelector('#imp-add').addEventListener('click', () => {
-      players.push(`Spieler ${players.length + 1}`);
+      players.push('');
       save();
       showSetup();
       const inputs = app.querySelectorAll('[data-player]');
-      inputs[inputs.length - 1].select();
+      inputs[inputs.length - 1].focus();
     });
     app.querySelectorAll('[data-step]').forEach((btn) => btn.addEventListener('click', () => {
       const n = settings.impostors + Number(btn.dataset.step);
@@ -151,8 +153,10 @@
     app.querySelector('#imp-start').addEventListener('click', startRound);
   }
 
+  const nameOf = (i) => (players[i] && players[i].trim()) || `Spieler ${i + 1}`;
+
   function startRound() {
-    players = players.map((p, i) => (p.trim() ? p.trim() : `Spieler ${i + 1}`));
+    players = players.map((p) => p.trim());
     save();
     const cats = settings.category === ALL ? Object.keys(WORDS) : [settings.category];
     const category = cats[Math.floor(Math.random() * cats.length)];
@@ -168,7 +172,7 @@
 
   function showPass() {
     if (revealIndex >= players.length) { showDiscuss(); return; }
-    const name = players[revealIndex];
+    const name = nameOf(revealIndex);
     render(`
       <div class="imp-card imp-center">
         <p class="imp-step">${revealIndex + 1} / ${players.length}</p>
@@ -197,7 +201,7 @@
   }
 
   function showDiscuss() {
-    const starter = players[round.starter];
+    const starter = nameOf(round.starter);
     const minutes = settings.timer;
     render(`
       <div class="imp-card imp-center">
@@ -265,7 +269,7 @@
   }
 
   function showResult() {
-    const names = round.impostors.map((i) => `<span class="imp-name">${esc(players[i])}</span>`).join(' &amp; ');
+    const names = round.impostors.map((i) => `<span class="imp-name">${esc(nameOf(i))}</span>`).join(' &amp; ');
     const plural = round.impostors.length > 1;
     render(`
       <div class="imp-card imp-center">
