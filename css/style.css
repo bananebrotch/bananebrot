@@ -816,12 +816,12 @@ h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); margin: 0.6rem 0 1rem; letter-spacin
 }
 .sky-controls input[type="range"] { width: 100%; accent-color: var(--banana-deep); }
 .sky-row { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
-.sky-checks { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+.sky-checks { display: flex; flex-wrap: wrap; gap: 0.5rem 0.85rem; }
 .sky-checks label { font-weight: 600; display: flex; gap: 0.4rem; align-items: center; }
 .sky-checks input { accent-color: var(--banana-deep); width: 1.1rem; height: 1.1rem; }
 .sky-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .sky-list li { background: color-mix(in srgb, var(--banana) 30%, transparent); padding: 0.2rem 0.65rem; border-radius: 999px; font-weight: 600; font-size: 0.88rem; }
-.sky-credit { font-size: 0.7rem; line-height: 1.5; color: var(--muted); margin: 0.6rem 0 0; opacity: 0.85; }
+.sky-credit { font-size: 0.7rem; line-height: 1.5; color: var(--muted); margin: calc(0.6rem + 4px) 0 0; opacity: 0.85; }
 
 /* ---------- Seite «Sternehimmel»: immer Nacht-Look ---------- */
 html:has(body.page-sky) { background: #0a1630; }

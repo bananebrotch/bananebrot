@@ -30,6 +30,7 @@
     locate: document.getElementById('sky-locate'),
     showPlanets: document.getElementById('sky-show-planets'),
     showCons: document.getElementById('sky-show-cons'),
+    showIss: document.getElementById('sky-show-iss'),
     when: document.getElementById('sky-when'),
     moon: document.getElementById('sky-moon'),
     list: document.getElementById('sky-list'),
@@ -421,7 +422,7 @@
 
     // ISS
     const iss = issLook(date, place);
-    if (iss && iss.alt > -2) {
+    if (iss && iss.alt > -2 && (!els.showIss || els.showIss.checked)) {
       // Bahnspur ±6 Minuten
       ctx.save();
       ctx.setLineDash([3 * scale, 4 * scale]);
@@ -557,7 +558,7 @@
         const key = `${place.lat},${place.lon},${Math.floor(date.getTime() / 300000)}`;
         if (key !== nextPassKey) { nextPass = findNextPass(date, place); nextPassKey = key; }
         const visibleNow = iss && iss.alt > 0 && iss.sunlit && sunH.alt < -6;
-        const passText = nextPass && !visibleNow ? ` Nächscht sichtbar: ${swissDate(nextPass.start)} (bis ${Math.round(nextPass.maxAlt)}° hoch).` : '';
+        const passText = nextPass && !visibleNow ? ` Nächstmal sichtbar: ${swissDate(nextPass.start)} (bis ${Math.round(nextPass.maxAlt)}° hoch).` : '';
         els.iss.textContent = now + passText;
       }
     }
@@ -656,6 +657,7 @@
   });
   els.showPlanets.addEventListener('change', draw);
   els.showCons.addEventListener('change', draw);
+  if (els.showIss) els.showIss.addEventListener('change', draw);
   if (els.locate) {
     els.locate.addEventListener('click', () => {
       if (!navigator.geolocation) { toast('Dein Browser kann den Standort nicht bestimmen.'); return; }
