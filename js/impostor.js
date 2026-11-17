@@ -47,6 +47,55 @@
       ['Bowling', 'Minigolf'], ['Grilliere', 'Picknick'], ['Karaoke', 'Disco'], ['Serie luege', 'Film luege'],
       ['Game', 'Brettspiel'], ['Yoga', 'Pilates'], ['Schlittle', 'Schlittschuehlaufe'], ['Fische', 'Böötle'],
       ['Fotografiere', 'Male'], ['Gartne', 'Pflanze umtopfe'], ['Lisme', 'Nähje'], ['Escape Room', 'Rätsel']
+    ],
+    'Reise & Ferie': [
+      ['Flugzüg', 'Zug'], ['Hotel', 'Ferienwohnig'], ['Strand', 'See'], ['Koffer', 'Rucksack'],
+      ['Pass', 'ID'], ['Kreuzfahrt', 'Fähri'], ['Camping', 'Glamping'], ['Städtetrip', 'Roadtrip'],
+      ['Stadtfüehrig', 'Museumsbsuech'], ['Souvenir', 'Postcharte'], ['Sunnebrand', 'Mückestich'], ['Jetlag', 'Schlafmangel'],
+      ['Flughafe', 'Bahnhof'], ['Boarding-Pass', 'Billett'], ['Reiseführer', 'Landcharte'], ['Mietauto', 'Taxi'],
+      ['Hängematte', 'Liegestuel'], ['Skiferie', 'Wanderferie'], ['Zoll', 'Grenzkontrolle'], ['Backpacker', 'Tourist']
+    ],
+    Bruef: [
+      ['Lehrerin', 'Kindergärtnerin'], ['Arzt', 'Zahnarzt'], ['Polizist', 'Füürwehrmaa'], ['Pilot', 'Lokführer'],
+      ['Koch', 'Bäcker'], ['Coiffeur', 'Kosmetikerin'], ['Informatiker', 'Elektriker'], ['Buur', 'Gärtner'],
+      ['Architekt', 'Ingenieur'], ['Pflegefachfrau', 'Hebamme'], ['Anwalt', 'Richter'], ['Journalist', 'Fotograf'],
+      ['Verchäufer', 'Kassierer'], ['Mechaniker', 'Velomech'], ['Banker', 'Buechhalter'], ['Schauspieler', 'Sänger'],
+      ['Tierarzt', 'Zoowärter'], ['Buschauffeur', 'Tramchauffeur'], ['Maler', 'Gipser'], ['Psychologin', 'Coach']
+    ],
+    Chleider: [
+      ['Jeans', 'Stoffhose'], ['Pullover', 'Hoodie'], ['Turnschueh', 'Stiefel'], ['Kappe', 'Mütze'],
+      ['Schal', 'Halstuech'], ['Bikini', 'Badhose'], ['Pyjama', 'Trainerhose'], ['Krawatte', 'Fliege'],
+      ['Händsche', 'Fäustling'], ['Rock', 'Kleid'], ['Gurt', 'Hosetreger'], ['Sunnehuet', 'Strohhuet'],
+      ['Socke', 'Strumpfhose'], ['Winterjagge', 'Weste'], ['T-Shirt', 'Hemd'], ['Ohrring', 'Halschetti'],
+      ['Sneaker', 'Flip-Flops'], ['Anzug', 'Smoking'], ['Unterhose', 'Boxershorts'], ['Brülle', 'Kontaktlinse']
+    ],
+    'Natur & Wätter': [
+      ['Gwitter', 'Rege'], ['Schnee', 'Hagel'], ['Regeboge', 'Sunneuntergang'], ['Nebel', 'Wolke'],
+      ['Wald', 'Park'], ['Bärg', 'Hügel'], ['See', 'Fluss'], ['Wasserfall', 'Brunne'],
+      ['Vulkan', 'Gletscher'], ['Wüeste', 'Strand'], ['Blitz', 'Donner'], ['Sturm', 'Wind'],
+      ['Höhli', 'Felswand'], ['Blueme', 'Struuch'], ['Baum', 'Busch'], ['Mond', 'Sunne'],
+      ['Stern', 'Komet'], ['Insle', 'Halbinsle'], ['Schneemaa', 'Iglu'], ['Herbstlaub', 'Tannzapfe']
+    ],
+    Schwiiz: [
+      ['Matterhorn', 'Eiger'], ['Sackmesser', 'Multitool'], ['Schwiizer Uhr', 'Smartwatch'], ['Chuehglogge', 'Trychle'],
+      ['Bundeshuus', 'Rathuus'], ['Fasnacht', 'Halloween'], ['1. August', 'Silvester'], ['Jodle', 'Ländlermusig'],
+      ['Röstigrabe', 'Sprachgrenze'], ['Gotthard', 'San Bernardino'], ['Rheinfall', 'Giessbachfäll'], ['Edelweiss', 'Enzian'],
+      ['Caquelon', 'Raclette-Ofe'], ['Chäsi', 'Schoggifabrik'], ['Halbtax', 'GA'], ['Zahnradbahn', 'Gondelbahn'],
+      ['Chalet', 'Alphütte'], ['Landsgmeind', 'Gmeindsversammlig'], ['Sechseläute', 'Knabeschiesse'], ['Militär', 'Zivildienst']
+    ],
+    'Musig & Party': [
+      ['Gitarre', 'Ukulele'], ['Klavier', 'Keyboard'], ['Schlagzüg', 'Cajon'], ['DJ', 'Band'],
+      ['Rap', 'Hip-Hop'], ['Rock', 'Metal'], ['Techno', 'House'], ['Schlager', 'Volksmusig'],
+      ['Chor', 'Orchester'], ['Tanzkurs', 'Zumba'], ['Geburtstagsparty', 'Überraschigsparty'], ['Chopfhörer', 'Lutsprecher'],
+      ['Vinyl', 'CD'], ['Mikrofon', 'Megafon'], ['Discokugle', 'Lasershow'], ['Playlist', 'Album'],
+      ['Cocktail', 'Shot'], ['Konfetti', 'Luftballon'], ['Afterparty', 'Vorglüehe'], ['Strassemusiker', 'Talentshow']
+    ],
+    'Chuchi & Huus': [
+      ['Pfanne', 'Topf'], ['Mixer', 'Pürierstab'], ['Toaster', 'Sandwichmaker'], ['Chüelschrank', 'Gfrierschrank'],
+      ['Gable', 'Löffel'], ['Teller', 'Schüssle'], ['Abwäschmaschine', 'Wöschmaschine'], ['Backofe', 'Mikrowälle'],
+      ['Sofa', 'Sessel'], ['Bett', 'Sofabett'], ['Tisch', 'Pult'], ['Lampe', 'Cherze'],
+      ['Spiegel', 'Fänster'], ['Duschi', 'Badwanne'], ['Zahnpasta', 'Seife'], ['WC-Papier', 'Haushaltpapier'],
+      ['Zimmerpflanze', 'Blumestruss'], ['Teppich', 'Vorhang'], ['Fernseh', 'Beamer'], ['Schublade', 'Chaschte']
     ]
   };
   const ALL = 'Alli Kategorie';
