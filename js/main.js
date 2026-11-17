@@ -203,54 +203,40 @@
     });
   }));
 
-  // ---------- Zähler über den Gratis-Dienst «Abacus» ----------
-  const ABACUS = 'https://abacus.jasoncameron.dev';
-  const fetchWithTimeout = (url, ms) => {
-    const ctrl = 'AbortController' in window ? new AbortController() : null;
-    const timer = ctrl ? setTimeout(() => ctrl.abort(), ms) : null;
-    return fetch(url, ctrl ? { signal: ctrl.signal, cache: 'no-store' } : { cache: 'no-store' })
-      .finally(() => timer && clearTimeout(timer));
-  };
-  // Holt einen Zählerwert mit bis zu 3 Versuchen. 404 = Zähler existiert noch nicht = 0.
-  const readCounter = (path, onValue, attempt = 1) => {
-    if (!window.fetch) return;
-    fetchWithTimeout(`${ABACUS}${path}`, 6000)
-      .then((r) => {
-        if (r.status === 404) return { value: 0 };
-        return r.ok ? r.json() : Promise.reject(new Error(String(r.status)));
-      })
-      .then((data) => onValue(Number(data && data.value) || 0))
-      .catch(() => {
-        if (attempt < 3) setTimeout(() => readCounter(path, onValue, attempt + 1), 1500 * attempt);
-      });
-  };
-  // Für das Spiel: ein gebackenes Brot zum weltweiten Zähler hinzufügen
-  window.countBakedLoaf = () => {
-    if (!window.fetch) return;
-    fetch(`${ABACUS}/hit/bananebrot.ch/brote`, { cache: 'no-store', keepalive: true }).catch(() => {});
-  };
-
-  if (document.querySelector('[data-hits]')) {
-    // Besuche der Startseite werden still mitgezählt (nicht angezeigt):
-    // Stand abrufbar unter https://abacus.jasoncameron.dev/get/bananebrot.ch/startseite
-    readCounter('/hit/bananebrot.ch/startseite', () => {});
-  }
-
-  // Im Guetschii: wie viele Bananenbrote alle Spieler zusammen schon gebacken haben
-  const loavesEl = document.querySelector('[data-hits]');
-  if (loavesEl) {
-    const showLoaves = (n, confirmed) => {
-      if (!n && !confirmed) return;
-      loavesEl.innerHTML = n
-        ? `Scho ${Number(n).toLocaleString('de-CH')} Bananebrot uf dere Site bache.`
-        : 'No kes Bananebrot uf dere Site bache. <a href="spiel.html">Bisch du de Erscht?</a>';
-      loavesEl.hidden = false;
+  // ---------- Zähler im Guetschii (Gratis-Dienst «Abacus») ----------
+  // Zählt jeden Aufruf der Startseite und zeigt die Zahl als «gebackene Brote» an.
+  // Robust: bis zu 3 Versuche mit Zeitlimit; die letzte bekannte Zahl wird gemerkt.
+  // Stand abrufbar unter https://abacus.jasoncameron.dev/get/bananebrot.ch/startseite
+  const hitsEl = document.querySelector('[data-hits]');
+  if (hitsEl && window.fetch) {
+    const COUNTER_URL = 'https://abacus.jasoncameron.dev/hit/bananebrot.ch/startseite';
+    const showHits = (n) => {
+      if (!n) return;
+      hitsEl.textContent = `Scho ${Number(n).toLocaleString('de-CH')} Bananebrot sind bache worde.`;
+      hitsEl.hidden = false;
     };
-    showLoaves(Number(store.get('bananebrot-loaves')) || 0); // sofort die letzte bekannte Zahl
-    readCounter('/get/bananebrot.ch/brote', (n) => {
-      if (n) store.set('bananebrot-loaves', String(n));
-      showLoaves(n, true);
-    });
+    showHits(Number(store.get('bananebrot-hits')) || 0); // sofort die letzte bekannte Zahl
+
+    const fetchWithTimeout = (url, ms) => {
+      const ctrl = 'AbortController' in window ? new AbortController() : null;
+      const timer = ctrl ? setTimeout(() => ctrl.abort(), ms) : null;
+      return fetch(url, ctrl ? { signal: ctrl.signal, cache: 'no-store' } : { cache: 'no-store' })
+        .finally(() => timer && clearTimeout(timer));
+    };
+    const tryCount = (attempt) => {
+      fetchWithTimeout(COUNTER_URL, 6000)
+        .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+        .then((data) => {
+          const n = Number(data && data.value);
+          if (!n) return;
+          store.set('bananebrot-hits', String(n));
+          showHits(n);
+        })
+        .catch(() => {
+          if (attempt < 3) setTimeout(() => tryCount(attempt + 1), 1500 * attempt);
+        });
+    };
+    tryCount(1);
   }
 
   // ---------- Jahr im Footer ----------
