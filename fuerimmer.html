@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FürImmer · bananebrot.ch</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="logo.svg?v=20261121112953">
+  <script>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}d.dataset.theme=t}catch(e){d.dataset.theme='light'}})();</script>
+  <link rel="stylesheet" href="css/style.css?v=20261121112953">
+</head>
+<body class="page-love">
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a class="logo" href="/"><span class="logo-mark"><svg viewBox="35 37 140 140" aria-hidden="true"><circle class="lf" fill="#5a3416" cx="72" cy="78" r="13"/><circle class="lf" fill="#5a3416" cx="128" cy="78" r="13"/><path class="lf" fill="#5a3416" d="M44 112 Q100 178 156 112 Q160 106 154 104 Q100 150 50 104 Q42 104 44 112 Z"/><path class="ls" fill="#9a5410" d="M154 104 L164 96 L168 102 L158 110 Z"/></svg></span><span class="logo-name">bananebrot<span class="tld">.ch</span></span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/">Start</a></li>
+        <li><a href="/rezept">Rezept</a></li>
+        <li><a href="/impostor">Impostor</a></li>
+        <li><a href="/sterne">Sternehimmel</a></li>
+        <li><a href="/fuerimmer" aria-current="page">FürImmer</a></li>
+      </ul>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Schoggi-Modus umschalten">
+        <span class="tt-track"><span class="tt-knob"></span></span>
+        <span class="tt-label">Schoggi-Modus</span>
+      </button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menü öffnen">☰</button>
+    </nav>
+  </header>
+
+  <main class="container love-main">
+    <!-- Sperrbildschirm -->
+    <section class="love-lock" id="love-lock">
+      <div class="love-lock-heart" aria-hidden="true">
+        <svg viewBox="0 0 100 92"><path d="M50 88 C22 66 4 50 4 28 C4 13 16 4 29 4 C39 4 46 10 50 17 C54 10 61 4 71 4 C84 4 96 13 96 28 C96 50 78 66 50 88 Z"/><g class="keyhole"><circle cx="50" cy="38" r="7"/><path d="M46 42 L54 42 L56 58 L44 58 Z"/></g></svg>
+      </div>
+      <h1 class="love-lock-title">FürImmer</h1>
+      <p class="love-lock-text">Die Siite isch nur für öpper ganz Bsunders.</p>
+      <form class="love-form" id="love-form" autocomplete="off">
+        <label class="sr-only" for="love-pin">Passwort</label>
+        <input id="love-pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="••••" autocomplete="off" aria-describedby="love-msg">
+        <button class="btn btn-primary" type="submit">Ufschliesse ❤️</button>
+      </form>
+      <p class="love-msg" id="love-msg" aria-live="polite"></p>
+    </section>
+
+    <!-- geheimer Inhalt (wird erst nach dem richtigen Passwort entschlüsselt) -->
+    <div class="love-content" id="love-content" hidden></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span data-year>2026</span> bananebrot.ch – mit viel ❤️ und 🍌</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=20261121112953"></script>
+  <script src="js/fuerimmer-daten.js?v=20261121112953"></script>
+  <script src="js/fuerimmer.js?v=20261121112953"></script>
+</body>
+</html>
